@@ -7,6 +7,10 @@ import com.unexpected.ant.model.Direction;
 public class Ant extends AbstractEntity {
     private Direction facingDirection;
 
+    public Ant(Direction facingDirection) {
+        this.facingDirection = facingDirection;
+    }
+
     @Override
     public void action(long tickCount) {
         move();
@@ -18,5 +22,13 @@ public class Ant extends AbstractEntity {
 
     protected Cell decideNextCell() {
         return getCells().get(0);
+    }
+
+    public Direction getFacingDirection() {
+        return facingDirection;
+    }
+
+    public void setFacingDirection(Direction facingDirection) {
+        this.facingDirection = facingDirection;
     }
 }

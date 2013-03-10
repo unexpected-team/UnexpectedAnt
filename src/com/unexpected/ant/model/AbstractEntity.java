@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractEntity implements Entity, Dynamic, Visitable {
-    private List<Cell> cells;
+public abstract class AbstractEntity implements Entity, Dynamic {
+    private List<Cell> cells = new ArrayList<>();
 
 
     @Override
@@ -13,20 +13,31 @@ public abstract class AbstractEntity implements Entity, Dynamic, Visitable {
 
     }
 
+    @Override
+    public void addCell(Cell cell) {
+        cells.add(cell);
+    }
+
+    @Override
+    public boolean canBeOnSameCellWith(Entity entity) {
+        return true;
+    }
+
+    public void getVisitedByAllEntitiesOnSameCells(EntityVisitor entityVisitor) {
+        for (Cell cell : getCells()) {
+            cell.visitByAllEntities(entityVisitor);
+        }
+    }
+
+    public void remove() {
+        for (Cell cell : getCells()) {
+            cell.removeEntity(this);
+        }
+    }
 
     @Override
     public List<Cell> getCells() {
         return Collections.unmodifiableList(cells);
-    }
-
-    @Override
-    public void setCells(List<Cell> cells) {
-        this.cells = new ArrayList<>(cells);
-    }
-
-    @Override
-    public void addCell(Cell cell) {
-        cells.add(cell);
     }
 
     @Override
@@ -40,18 +51,7 @@ public abstract class AbstractEntity implements Entity, Dynamic, Visitable {
     }
 
     @Override
-    public boolean canBeOnSameCellWith(Entity entity) {
-        return true;
-    }
-
-    public void remove() {
-        for (Cell cell : getCells()) {
-            cell.removeEntity(this);
-        }
-    }
-
-    @Override
-    public void visit(Entity entity) {
-
+    public void setCells(List<Cell> cells) {
+        this.cells = new ArrayList<>(cells);
     }
 }

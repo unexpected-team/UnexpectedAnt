@@ -1,5 +1,5 @@
 package com.unexpected.ant.model;
 
-public interface Visitable {
+public interface EntityVisitor {
     public void visit(Entity entity);
 }

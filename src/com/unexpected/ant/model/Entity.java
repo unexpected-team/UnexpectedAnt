@@ -3,17 +3,17 @@ package com.unexpected.ant.model;
 import java.util.List;
 
 public interface Entity {
+    public void addCell(Cell cell);
+
+    boolean canBeOnSameCellWith(Entity entity);
+
     public List<Cell> getCells();
 
-    public void setCells(List<Cell> cells);
-
-    public void addCell(Cell cell);
+    void remove();
 
     public void removeCell(Cell cell);
 
     public void removeCells(List<Cell> cells);
 
-    boolean canBeOnSameCellWith(Entity entity);
-
-    void remove();
+    public void setCells(List<Cell> cells);
 }
