@@ -1,6 +1,7 @@
 package com.unexpected.ant.model.entity;
 
 import com.unexpected.ant.model.AbstractEntity;
+import com.unexpected.ant.model.EntityVisitor;
 import com.unexpected.ant.model.EntityVisitorAdapter;
 
 public class Echidna extends AbstractEntity {
@@ -11,8 +12,13 @@ public class Echidna extends AbstractEntity {
     public void action(long tickCount) {
         super.action(tickCount);
         if (isHungry()) {
-            getVisitedByAllEntitiesOnSameCells(new EchidnaEatVisitor());
+            getVisitedByEntitiesOnSameCells(new EatVisitor());
         }
+    }
+
+    @Override
+    public void acceptVisitor(EntityVisitor visitor) {
+        visitor.visit(this);
     }
 
     public boolean isHungry() {
@@ -39,7 +45,7 @@ public class Echidna extends AbstractEntity {
         sleepCounter = amount;
     }
 
-    protected class EchidnaEatVisitor extends EntityVisitorAdapter {
+    protected class EatVisitor extends EntityVisitorAdapter {
         public void visit(Ant ant) {
             hunger--;
             ant.remove();

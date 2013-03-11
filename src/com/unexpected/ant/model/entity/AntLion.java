@@ -1,6 +1,7 @@
-package com.unexpected.ant.model;
+package com.unexpected.ant.model.entity;
 
-import com.unexpected.ant.model.entity.Ant;
+import com.unexpected.ant.model.AbstractEntity;
+import com.unexpected.ant.model.EntityVisitorAdapter;
 
 public class AntLion extends AbstractEntity {
     @Override
@@ -10,10 +11,10 @@ public class AntLion extends AbstractEntity {
     }
 
     private void kill() {
-        getVisitedByAllEntitiesOnSameCells(new AntLionVisitor());
+        getVisitedByEntitiesOnSameCells(new EatVisitor());
     }
 
-    protected class AntLionVisitor extends EntityVisitorAdapter {
+    protected class EatVisitor extends EntityVisitorAdapter {
         public void visit(Ant ant) {
             ant.remove();
         }

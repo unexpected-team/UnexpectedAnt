@@ -1,6 +1,5 @@
 package com.unexpected.ant.model.entity;
 
-import com.unexpected.ant.model.Cell;
 import com.unexpected.ant.model.EntityVisitorAdapter;
 
 public class KillerSpraySmell extends Smell {
@@ -11,12 +10,11 @@ public class KillerSpraySmell extends Smell {
     }
 
     private void kill() {
-        for (Cell cell : getCells()) {
-            cell.visitByAllEntities(new KillerSprayVisitor());
-        }
+        getVisitedByEntitiesOnSameCells(new KillVisitor());
     }
 
-    protected class KillerSprayVisitor extends EntityVisitorAdapter {
+    protected class KillVisitor extends EntityVisitorAdapter {
+        @Override
         public void visit(Ant ant) {
             ant.remove();
         }

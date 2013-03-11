@@ -13,6 +13,10 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 
     }
 
+    public void acceptVisitor(EntityVisitor visitor) {
+        visitor.visit(this);
+    }
+
     @Override
     public void addCell(Cell cell) {
         cells.add(cell);
@@ -23,9 +27,9 @@ public abstract class AbstractEntity implements Entity, Dynamic {
         return true;
     }
 
-    public void getVisitedByAllEntitiesOnSameCells(EntityVisitor entityVisitor) {
+    protected void getVisitedByEntitiesOnSameCells(EntityVisitor entityVisitor) {
         for (Cell cell : getCells()) {
-            cell.visitByAllEntities(entityVisitor);
+            cell.visitEntities(entityVisitor);
         }
     }
 

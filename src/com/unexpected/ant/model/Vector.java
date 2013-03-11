@@ -1,12 +1,12 @@
 package com.unexpected.ant.model;
 
-public class Position {
+public class Vector {
     private int x;
     private int y;
 
-    public Position(Position position) {
-        this.x = position.getX();
-        this.y = position.getY();
+    public Vector(Vector vector) {
+        this.x = vector.getX();
+        this.y = vector.getY();
     }
 
     public int getX() {

@@ -1,14 +1,11 @@
 package com.unexpected.ant.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Cell {
     private List<Entity> entities = new ArrayList<>();
     private Map<Direction, Cell> neighbours = new HashMap<>();
-    private Position position;
+    private Vector vector;
 
     public void addEntity(Entity entity) {
         entities.add(entity);
@@ -27,25 +24,29 @@ public class Cell {
         return neighbours.get(direction);
     }
 
-    public Position getPosition() {
-        return position;
+    public Collection<Cell> getNeighbours() {
+        return neighbours.values();
+    }
+
+    public Vector getVector() {
+        return vector;
     }
 
     public void removeEntity(Entity entity) {
         entities.remove(entity);
     }
 
-    public void setNeighbour(Direction direction, Cell cell) {
+    public void addNeighbour(Direction direction, Cell cell) {
         neighbours.put(direction, cell);
     }
 
-    public void setPosition(Position position) {
-        this.position = new Position(position);
+    public void setVector(Vector vector) {
+        this.vector = new Vector(vector);
     }
 
-    public void visitByAllEntities(EntityVisitor entityVisitor) {
+    public void visitEntities(EntityVisitor entityVisitor) {
         for (Entity entity : entities) {
-            entityVisitor.visit(entity);
+            entity.acceptVisitor(entityVisitor);
         }
     }
 }

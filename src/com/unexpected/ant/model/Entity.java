@@ -16,4 +16,6 @@ public interface Entity {
     public void removeCells(List<Cell> cells);
 
     public void setCells(List<Cell> cells);
+
+    void acceptVisitor(EntityVisitor visitor);
 }
