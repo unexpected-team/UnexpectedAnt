@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractEntity implements Entity, Dynamic {
-    private List<Cell> cells = new ArrayList<>();
+    protected List<Cell> cells = new ArrayList<>();
 
 
     @Override
@@ -42,6 +42,10 @@ public abstract class AbstractEntity implements Entity, Dynamic {
     @Override
     public List<Cell> getCells() {
         return Collections.unmodifiableList(cells);
+    }
+
+    public Cell getCell() {
+        return getCells().get(0);
     }
 
     @Override

@@ -25,12 +25,23 @@ public class Ant extends AbstractEntity {
 
     public void move() {
         printCurrentMethod();
-        decideNextCell();
+        remove();
+        Cell nextCell = decideNextCell();
+        moveTo(nextCell);
+    }
+
+    public void moveTo(Cell cell) {
+        printCurrentMethod();
+        this.remove();
+        cell.addEntity(this);
+        this.cells.clear();
+        this.cells.add(cell);
+
     }
 
     protected Cell decideNextCell() {
         printCurrentMethod();
-        return null;
+        return getCell().getNeighbours().get(0);
     }
 
     public Direction getFacingDirection() {

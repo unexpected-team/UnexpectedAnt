@@ -3,6 +3,7 @@ package com.unexpected.ant;
 import com.unexpected.ant.skeleton_test.TestCase;
 import com.unexpected.ant.skeleton_test.TestDoesNotExistException;
 import com.unexpected.ant.skeleton_test.TestRunner;
+import com.unexpected.ant.skeleton_test.test.AntMoves;
 import com.unexpected.ant.skeleton_test.test.BuildGameField;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class Main {
     }
 
     public Main() {
-        testRunner.addTestCase(new BuildGameField());
+        addTestCases();
         displayTestCases();
         Scanner scanner = new Scanner(System.in);
 
@@ -25,6 +26,11 @@ public class Main {
         } catch (TestDoesNotExistException e) {
             System.out.println("Ilyen teszt nem létezik");
         }
+    }
+
+    private void addTestCases() {
+        testRunner.addTestCase(new BuildGameField());
+        testRunner.addTestCase(new AntMoves());
     }
 
     public void displayTestCases() {

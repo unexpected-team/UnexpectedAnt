@@ -1,6 +1,9 @@
 package com.unexpected.ant.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
 
@@ -37,8 +40,8 @@ public class Cell {
         return neighbours.get(direction);
     }
 
-    public Collection<Cell> getNeighbours() {
-        return neighbours.values();
+    public List<Cell> getNeighbours() {
+        return new ArrayList<>(neighbours.values());
     }
 
     public Vector getPosition() {
