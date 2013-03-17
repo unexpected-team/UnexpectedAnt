@@ -28,6 +28,7 @@ public class Cell {
     }
 
     public boolean canBeSteppedOnBy(Entity subject) {
+        printCurrentMethod();
         for (Entity entity : entities) {
             if (!entity.canBeOnSameCellWith(subject) || !subject.canBeOnSameCellWith(entity)) {
                 return false;

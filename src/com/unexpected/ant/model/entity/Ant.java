@@ -41,7 +41,15 @@ public class Ant extends AbstractEntity {
 
     protected Cell decideNextCell() {
         printCurrentMethod();
-        return getCell().getNeighbours().get(0);
+        Cell nextCell = getCell();
+        for (Cell cell : getCell().getNeighbours()) {
+            if (cell.canBeSteppedOnBy(this)) {
+                nextCell = cell;
+            }
+        }
+
+        return nextCell;
+
     }
 
     public Direction getFacingDirection() {

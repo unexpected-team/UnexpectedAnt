@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
+
 public abstract class AbstractEntity implements Entity, Dynamic {
     protected List<Cell> cells = new ArrayList<>();
 
@@ -24,10 +26,12 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 
     @Override
     public boolean canBeOnSameCellWith(Entity entity) {
+        printCurrentMethod();
         return true;
     }
 
     protected void getVisitedByEntitiesOnSameCells(EntityVisitor entityVisitor) {
+        printCurrentMethod();
         for (Cell cell : getCells()) {
             cell.visitEntities(entityVisitor);
         }

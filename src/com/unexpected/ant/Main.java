@@ -3,6 +3,7 @@ package com.unexpected.ant;
 import com.unexpected.ant.skeleton_test.TestCase;
 import com.unexpected.ant.skeleton_test.TestDoesNotExistException;
 import com.unexpected.ant.skeleton_test.TestRunner;
+import com.unexpected.ant.skeleton_test.test.AntEncountersObstacle;
 import com.unexpected.ant.skeleton_test.test.AntMoves;
 import com.unexpected.ant.skeleton_test.test.BuildGameField;
 import com.unexpected.ant.skeleton_test.test.EchidnaMoves;
@@ -33,6 +34,7 @@ public class Main {
         testRunner.addTestCase(new BuildGameField());
         testRunner.addTestCase(new AntMoves());
         testRunner.addTestCase(new EchidnaMoves());
+        testRunner.addTestCase(new AntEncountersObstacle());
     }
 
     public void displayTestCases() {
