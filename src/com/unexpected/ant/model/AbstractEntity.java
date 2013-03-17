@@ -67,4 +67,11 @@ public abstract class AbstractEntity implements Entity, Dynamic {
     public void setCells(List<Cell> cells) {
         this.cells = new ArrayList<>(cells);
     }
+
+    public void setCell(Cell cell) {
+        printCurrentMethod();
+        cells.clear();
+        cells.add(cell);
+        cell.addEntity(this);
+    }
 }

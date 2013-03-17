@@ -1,14 +1,11 @@
 package com.unexpected.ant.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
 
 public class Cell {
-    private List<Entity> entities = new ArrayList<>();
+    private Set<Entity> entities = new HashSet<>();
     private Map<Direction, Cell> neighbours = new HashMap<>();
     private Vector position;
 
