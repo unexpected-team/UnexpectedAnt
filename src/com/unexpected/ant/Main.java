@@ -36,6 +36,7 @@ public class Main {
         testRunner.addTestCase(new AntLionEatsAnt());
         testRunner.addTestCase(new AntEatsFood());
         testRunner.addTestCase(new KillerSprayKillsAnt());
+        testRunner.addTestCase(new DeodorantSprayRemovesAntSmell());
     }
 
     public void displayTestCases() {
