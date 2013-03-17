@@ -58,6 +58,7 @@ public class Cell {
     }
 
     public void visitEntities(EntityVisitor entityVisitor) {
+        printCurrentMethod();
         for (Entity entity : entities) {
             entity.acceptVisitor(entityVisitor);
         }

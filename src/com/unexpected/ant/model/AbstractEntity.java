@@ -38,6 +38,7 @@ public abstract class AbstractEntity implements Entity, Dynamic {
     }
 
     public void remove() {
+        printCurrentMethod();
         for (Cell cell : getCells()) {
             cell.removeEntity(this);
         }

@@ -19,7 +19,8 @@ public class Echidna extends AbstractEntity {
         }
     }
 
-    private void eat() {
+    public void eat() {
+        printCurrentMethod();
         getVisitedByEntitiesOnSameCells(new EatVisitor());
     }
 
@@ -70,6 +71,7 @@ public class Echidna extends AbstractEntity {
 
     protected class EatVisitor extends EntityVisitorAdapter {
         public void visit(Ant ant) {
+            printCurrentMethod();
             hunger--;
             ant.remove();
         }
