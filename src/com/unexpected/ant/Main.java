@@ -5,6 +5,7 @@ import com.unexpected.ant.skeleton_test.TestDoesNotExistException;
 import com.unexpected.ant.skeleton_test.TestRunner;
 import com.unexpected.ant.skeleton_test.test.AntMoves;
 import com.unexpected.ant.skeleton_test.test.BuildGameField;
+import com.unexpected.ant.skeleton_test.test.EchidnaMoves;
 
 import java.util.List;
 import java.util.Scanner;
@@ -31,6 +32,7 @@ public class Main {
     private void addTestCases() {
         testRunner.addTestCase(new BuildGameField());
         testRunner.addTestCase(new AntMoves());
+        testRunner.addTestCase(new EchidnaMoves());
     }
 
     public void displayTestCases() {

@@ -1,8 +1,11 @@
 package com.unexpected.ant.model.entity;
 
 import com.unexpected.ant.model.AbstractEntity;
+import com.unexpected.ant.model.Cell;
 import com.unexpected.ant.model.EntityVisitor;
 import com.unexpected.ant.model.EntityVisitorAdapter;
+
+import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
 
 public class Echidna extends AbstractEntity {
     private int hunger;
@@ -42,11 +45,27 @@ public class Echidna extends AbstractEntity {
     }
 
     public void move() {
+        printCurrentMethod();
+        Cell nextCell = decideNextCell();
+        moveTo(nextCell);
+    }
 
+    public Cell decideNextCell() {
+        printCurrentMethod();
+        return getCell().getNeighbours().get(0);
     }
 
     public void sleep(int amount) {
         sleepCounter = amount;
+    }
+
+    public void moveTo(Cell cell) {
+        printCurrentMethod();
+        this.remove();
+        cell.addEntity(this);
+        this.cells.clear();
+        this.cells.add(cell);
+
     }
 
     protected class EatVisitor extends EntityVisitorAdapter {
@@ -55,4 +74,5 @@ public class Echidna extends AbstractEntity {
             ant.remove();
         }
     }
+
 }
