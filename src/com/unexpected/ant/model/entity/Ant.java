@@ -6,6 +6,7 @@ import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
 
 public class Ant extends AbstractEntity {
     private Direction facingDirection;
+    private Food food;
 
     public Ant(Direction facingDirection) {
         this.facingDirection = facingDirection;
@@ -21,6 +22,18 @@ public class Ant extends AbstractEntity {
     public void action(long tickCount) {
         printCurrentMethod();
         move();
+    }
+
+    public void eat() {
+        printCurrentMethod();
+        if (!hasFood()) {
+            getVisitedByEntitiesOnSameCells(new EatVisitor());
+        }
+    }
+
+    public boolean hasFood() {
+        printCurrentMethod();
+        return food != null;
     }
 
     public void move() {
@@ -78,8 +91,10 @@ public class Ant extends AbstractEntity {
     protected class EatVisitor extends EntityVisitorAdapter {
         @Override
         public void visit(Food food) {
-            food.remove();
-
+            if (!Ant.this.hasFood()) {
+                food.remove();
+                Ant.this.food = food;
+            }
         }
     }
 }

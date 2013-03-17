@@ -34,6 +34,7 @@ public class Main {
         testRunner.addTestCase(new AntEncountersObstacle());
         testRunner.addTestCase(new EchidnaEatsAnt());
         testRunner.addTestCase(new AntLionEatsAnt());
+        testRunner.addTestCase(new AntEatsFood());
     }
 
     public void displayTestCases() {
