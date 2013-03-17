@@ -2,6 +2,8 @@ package com.unexpected.ant.model.entity;
 
 import com.unexpected.ant.model.*;
 
+import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
+
 public class Ant extends AbstractEntity {
     private Direction facingDirection;
 
@@ -11,26 +13,33 @@ public class Ant extends AbstractEntity {
 
     @Override
     public void acceptVisitor(EntityVisitor visitor) {
+        printCurrentMethod();
         visitor.visit(this);
     }
 
     @Override
     public void action(long tickCount) {
+        printCurrentMethod();
         move();
     }
 
     public void move() {
+        printCurrentMethod();
+        decideNextCell();
     }
 
     protected Cell decideNextCell() {
-        return getCells().get(0);
+        printCurrentMethod();
+        return null;
     }
 
     public Direction getFacingDirection() {
+        printCurrentMethod();
         return facingDirection;
     }
 
     public void setFacingDirection(Direction facingDirection) {
+        printCurrentMethod();
         this.facingDirection = facingDirection;
     }
 

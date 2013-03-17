@@ -12,8 +12,12 @@ public class Echidna extends AbstractEntity {
     public void action(long tickCount) {
         super.action(tickCount);
         if (isHungry()) {
-            getVisitedByEntitiesOnSameCells(new EatVisitor());
+            eat();
         }
+    }
+
+    private void eat() {
+        getVisitedByEntitiesOnSameCells(new EatVisitor());
     }
 
     @Override

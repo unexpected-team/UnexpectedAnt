@@ -2,13 +2,26 @@ package com.unexpected.ant.model;
 
 import java.util.*;
 
+import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
+
 public class Cell {
     private List<Entity> entities = new ArrayList<>();
     private Map<Direction, Cell> neighbours = new HashMap<>();
-    private Vector vector;
+    private Vector position;
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+    }
+
+    public void addNeighbour(Direction direction, Cell cell) {
+        printCurrentMethod();
+        if (cell == null) {
+            return;
+        }
+        neighbours.put(direction, cell);
+        if (!this.equals(cell.getNeighbour(direction.getOpposite()))) {
+            cell.addNeighbour(direction.getOpposite(), this);
+        }
     }
 
     public boolean canBeSteppedOnBy(Entity subject) {
@@ -28,25 +41,25 @@ public class Cell {
         return neighbours.values();
     }
 
-    public Vector getVector() {
-        return vector;
+    public Vector getPosition() {
+        return position;
     }
 
     public void removeEntity(Entity entity) {
         entities.remove(entity);
     }
 
-    public void addNeighbour(Direction direction, Cell cell) {
-        neighbours.put(direction, cell);
-    }
-
-    public void setVector(Vector vector) {
-        this.vector = new Vector(vector);
+    public void setPosition(Vector position) {
+        this.position = new Vector(position);
     }
 
     public void visitEntities(EntityVisitor entityVisitor) {
         for (Entity entity : entities) {
             entity.acceptVisitor(entityVisitor);
         }
+    }
+
+    public boolean equals(Object other) {
+        return other instanceof Cell && other != null && other == this;
     }
 }
