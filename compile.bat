@@ -1,3 +1,4 @@
+PATH %JAVA_HOME%;%PATH%
 mkdir out
 cd src
 dir /s /B *.java > sources.txt
