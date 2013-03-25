@@ -6,10 +6,7 @@ import com.unexpected.ant.model.entity.Ant;
 import com.unexpected.ant.skeleton_test.AbstractTestCase;
 
 public class AntMoves extends AbstractTestCase {
-    public AntMoves() {
-        super("Hangya mozgása");
-    }
-
+    @Override
     public void doRun() {
         Ant ant = new Ant(Direction.NORTH);
         Cell cell = new Cell();

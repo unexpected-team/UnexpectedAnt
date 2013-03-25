@@ -4,17 +4,41 @@ import java.util.*;
 
 import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
 
+/**
+ * This cell represents one unit of the game field
+ */
 public class Cell {
     private Set<Entity> entities = new HashSet<>();
     private Map<Direction, Cell> neighbours = new HashMap<>();
     private Vector position;
 
+    /**
+     * Adds an entity to the cell
+     *
+     * @param entity The entity to be added
+     */
     public void addEntity(Entity entity) {
+        printCurrentMethod(this);
         entities.add(entity);
     }
 
+    /**
+     * Returns the entities on this cell as an unmodifiable set
+     *
+     * @return the entities
+     */
+    public Set<Entity> getEntities() {
+        return Collections.unmodifiableSet(entities);
+    }
+
+    /**
+     * Add neighbouring cell
+     *
+     * @param direction
+     * @param cell
+     */
     public void addNeighbour(Direction direction, Cell cell) {
-        printCurrentMethod();
+        printCurrentMethod(this);
         if (cell == null) {
             return;
         }
@@ -24,8 +48,29 @@ public class Cell {
         }
     }
 
+    public boolean equals(Object other) {
+        return other instanceof Cell && other != null && other == this;
+    }
+
+    /**
+     * Returns the neighbour in that direction
+     *
+     * @param direction
+     * @return The neighbour
+     */
+    public Cell getNeighbour(Direction direction) {
+        printCurrentMethod(this);
+        return neighbours.get(direction);
+    }
+
+    /**
+     * Returns whether the subject entity can step on this cell
+     *
+     * @param subject The subject entity
+     * @return true, if the subject can step on this cell, otherwise false
+     */
     public boolean canBeSteppedOnBy(Entity subject) {
-        printCurrentMethod();
+        printCurrentMethod(this);
         for (Entity entity : entities) {
             if (!entity.canBeOnSameCellWith(subject) || !subject.canBeOnSameCellWith(entity)) {
                 return false;
@@ -34,34 +79,56 @@ public class Cell {
         return true;
     }
 
-    public Cell getNeighbour(Direction direction) {
-        return neighbours.get(direction);
-    }
-
+    /**
+     * Returns all the neighbours of this cell
+     *
+     * @return The list of neighbours
+     */
     public List<Cell> getNeighbours() {
+        printCurrentMethod(this);
         return new ArrayList<>(neighbours.values());
     }
 
+    /**
+     * Returns the position of the cell on the game field
+     *
+     * @return The position
+     */
     public Vector getPosition() {
         return position;
     }
 
+    /**
+     * Removes the given entity from the cell
+     *
+     * @param entity The entity to be removed
+     */
     public void removeEntity(Entity entity) {
+        printCurrentMethod(this);
         entities.remove(entity);
     }
 
+    /**
+     * Sets the position of the cell on the game field. The position gets stored as a copy
+     *
+     * @param position The position
+     */
     public void setPosition(Vector position) {
         this.position = new Vector(position);
     }
 
+    /**
+     * Visits the entities
+     *
+     * @param entityVisitor
+     */
     public void visitEntities(EntityVisitor entityVisitor) {
-        printCurrentMethod();
-        for (Entity entity : entities) {
-            entity.acceptVisitor(entityVisitor);
+        printCurrentMethod(this);
+        Set<Entity> toBeVisited = new HashSet<>(entities);
+        for (Entity entity : toBeVisited) {
+            if (entities.contains(entity)) {
+                entity.acceptVisitor(entityVisitor);
+            }
         }
-    }
-
-    public boolean equals(Object other) {
-        return other instanceof Cell && other != null && other == this;
     }
 }

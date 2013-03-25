@@ -2,6 +2,10 @@ package com.unexpected.ant.model;
 
 import com.unexpected.ant.model.entity.*;
 
+/**
+ * Visitor class for visiting entities using the visitor pattern. You should add a visit method for all the types
+ * you want to visit.
+ */
 public interface EntityVisitor {
     void visit(Entity entity);
 

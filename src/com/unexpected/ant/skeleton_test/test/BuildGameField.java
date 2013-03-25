@@ -5,10 +5,6 @@ import com.unexpected.ant.model.Direction;
 import com.unexpected.ant.skeleton_test.AbstractTestCase;
 
 public class BuildGameField extends AbstractTestCase {
-    public BuildGameField() {
-        super("Játéktér megépítése");
-    }
-
     @Override
     protected void doRun() {
         Cell topleftCell = new Cell();

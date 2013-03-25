@@ -8,8 +8,8 @@ public class CellTest {
     @Test
     public void testVisitByAllEntities() throws Exception {
         Cell cell = new Cell();
-        cell.addEntity(new Echidna());
-        cell.addEntity(new Echidna());
+        cell.addEntity(new Echidna(Direction.WEST));
+        cell.addEntity(new Echidna(Direction.WEST));
         cell.addEntity(new AntSmell());
         TestVisitor entityVisitor = new TestVisitor();
         cell.visitEntities(entityVisitor);

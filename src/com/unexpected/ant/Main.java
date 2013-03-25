@@ -17,13 +17,22 @@ public class Main {
 
     public Main() {
         addTestCases();
-        displayTestCases();
-        Scanner scanner = new Scanner(System.in);
-
-        try {
-            testRunner.run(scanner.nextInt() - 1);
-        } catch (TestDoesNotExistException e) {
-            System.out.println("Ilyen teszt nem létezik");
+        while (true) {
+            displayTestCases();
+            System.out.print("Írd be a teszteset számát(0=kilép): ");
+            Scanner scanner = new Scanner(System.in);
+            int testCase = scanner.nextInt();
+            //exit on 0
+            if (testCase == 0) {
+                break;
+            }
+            try {
+                // try to run the test
+                testRunner.run(testCase);
+            } catch (TestDoesNotExistException e) {
+                // if test does not exist
+                System.out.println("Ilyen teszt nem létezik");
+            }
         }
     }
 

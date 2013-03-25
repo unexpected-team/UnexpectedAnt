@@ -6,12 +6,9 @@ import com.unexpected.ant.model.entity.Echidna;
 import com.unexpected.ant.skeleton_test.AbstractTestCase;
 
 public class EchidnaMoves extends AbstractTestCase {
-    public EchidnaMoves() {
-        super("Hangyászsün mozgása");
-    }
-
+    @Override
     public void doRun() {
-        Echidna echidna = new Echidna();
+        Echidna echidna = new Echidna(Direction.EAST);
         Cell cell = new Cell();
         Cell northNeighbour = new Cell();
         cell.addNeighbour(Direction.NORTH, northNeighbour);

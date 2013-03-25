@@ -8,10 +8,7 @@ import com.unexpected.ant.model.entity.ObstacleType;
 import com.unexpected.ant.skeleton_test.AbstractTestCase;
 
 public class AntEncountersObstacle extends AbstractTestCase {
-    public AntEncountersObstacle() {
-        super("Hangya találkozik egy akadállyal");
-    }
-
+    @Override
     public void doRun() {
         Ant ant = new Ant(Direction.NORTH);
         Cell cell = new Cell();

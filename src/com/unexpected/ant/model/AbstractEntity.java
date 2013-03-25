@@ -6,17 +6,20 @@ import java.util.List;
 
 import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
 
+/**
+ * This class represent the default implementation of an entity on the game field
+ */
 public abstract class AbstractEntity implements Entity, Dynamic {
     protected List<Cell> cells = new ArrayList<>();
 
+    @Override
+    public void acceptVisitor(EntityVisitor visitor) {
+        visitor.visit(this);
+    }
 
     @Override
     public void action(long tickCount) {
 
-    }
-
-    public void acceptVisitor(EntityVisitor visitor) {
-        visitor.visit(this);
     }
 
     @Override
@@ -26,21 +29,28 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 
     @Override
     public boolean canBeOnSameCellWith(Entity entity) {
-        printCurrentMethod();
+        printCurrentMethod(this);
         return true;
     }
 
-    protected void getVisitedByEntitiesOnSameCells(EntityVisitor entityVisitor) {
-        printCurrentMethod();
-        for (Cell cell : getCells()) {
-            cell.visitEntities(entityVisitor);
-        }
+    /**
+     * Returns the first cell of the shape, useful for entities containing only one cell
+     *
+     * @return The first cell
+     */
+    public Cell getCell() {
+        return getCells().get(0);
     }
 
-    public void remove() {
-        printCurrentMethod();
+    /**
+     * The given visitor gets visited by all entity on same cells
+     *
+     * @param entityVisitor The visitor to be visited
+     */
+    protected void getVisitedByEntitiesOnSameCells(EntityVisitor entityVisitor) {
+        printCurrentMethod(this);
         for (Cell cell : getCells()) {
-            cell.removeEntity(this);
+            cell.visitEntities(entityVisitor);
         }
     }
 
@@ -49,8 +59,12 @@ public abstract class AbstractEntity implements Entity, Dynamic {
         return Collections.unmodifiableList(cells);
     }
 
-    public Cell getCell() {
-        return getCells().get(0);
+    @Override
+    public void remove() {
+        printCurrentMethod(this);
+        for (Cell cell : getCells()) {
+            cell.removeEntity(this);
+        }
     }
 
     @Override
@@ -63,15 +77,20 @@ public abstract class AbstractEntity implements Entity, Dynamic {
         this.cells.removeAll(cells);
     }
 
-    @Override
-    public void setCells(List<Cell> cells) {
-        this.cells = new ArrayList<>(cells);
-    }
-
+    /**
+     * Sets one cell for the entity's shape
+     *
+     * @param cell
+     */
     public void setCell(Cell cell) {
-        printCurrentMethod();
+        printCurrentMethod(this);
         cells.clear();
         cells.add(cell);
         cell.addEntity(this);
+    }
+
+    @Override
+    public void setCells(List<Cell> cells) {
+        this.cells = new ArrayList<>(cells);
     }
 }

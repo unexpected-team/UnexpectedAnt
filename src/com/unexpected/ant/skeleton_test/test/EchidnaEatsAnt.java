@@ -10,7 +10,7 @@ public class EchidnaEatsAnt extends AbstractTestCase {
     @Override
     protected void doRun() {
         Cell cell = new Cell();
-        Echidna echidna = new Echidna();
+        Echidna echidna = new Echidna(Direction.WEST);
         echidna.setHunger(5);
         Ant ant = new Ant(Direction.NORTH);
 
