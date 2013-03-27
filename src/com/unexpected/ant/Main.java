@@ -28,7 +28,7 @@ public class Main {
             }
             try {
                 // try to run the test
-                testRunner.run(testCase);
+                testRunner.run(testCase - 1);
             } catch (TestDoesNotExistException e) {
                 // if test does not exist
                 System.out.println("Ilyen teszt nem létezik");
