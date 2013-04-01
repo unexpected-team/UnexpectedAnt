@@ -8,7 +8,7 @@ import com.unexpected.ant.skeleton_test.AbstractTestCase;
 public class EchidnaMoves extends AbstractTestCase {
     @Override
     public void doRun() {
-        Echidna echidna = new Echidna(Direction.EAST);
+        Echidna echidna = new Echidna(Direction.NORTHEAST);
         Cell cell = new Cell();
         Cell northNeighbour = new Cell();
         cell.addNeighbour(Direction.NORTH, northNeighbour);

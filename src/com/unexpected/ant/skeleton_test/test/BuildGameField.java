@@ -13,9 +13,9 @@ public class BuildGameField extends AbstractTestCase {
         Cell bottomrightCell = new Cell();
 
         topleftCell.addNeighbour(Direction.SOUTH, bottomleftCell);
-        topleftCell.addNeighbour(Direction.EAST, toprightCell);
+        topleftCell.addNeighbour(Direction.SOUTHEAST, toprightCell);
 
-        bottomrightCell.addNeighbour(Direction.WEST, bottomleftCell);
+        bottomrightCell.addNeighbour(Direction.NORTHWEST, bottomleftCell);
         bottomrightCell.addNeighbour(Direction.NORTH, toprightCell);
     }
 }

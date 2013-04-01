@@ -4,7 +4,7 @@ package com.unexpected.ant.model;
  * Directions on the game field
  */
 public enum Direction {
-    NORTH, WEST, SOUTH, EAST;
+    NORTH, NORTHEAST, SOUTHEAST, SOUTH, SOUTHWEST, NORTHWEST;
 
     /**
      * Returns the opposite direction
@@ -13,14 +13,18 @@ public enum Direction {
      */
     public Direction getOpposite() {
         switch (this) {
-            case EAST:
-                return WEST;
-            case WEST:
-                return EAST;
-            case SOUTH:
-                return NORTH;
             case NORTH:
                 return SOUTH;
+            case NORTHEAST:
+                return SOUTHWEST;
+            case SOUTHEAST:
+                return NORTHWEST;
+            case SOUTH:
+                return NORTH;
+            case SOUTHWEST:
+                return NORTHEAST;
+            case NORTHWEST:
+                return SOUTHEAST;
         }
         return NORTH;
     }
