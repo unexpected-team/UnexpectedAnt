@@ -89,6 +89,10 @@ public class Cell {
         return new ArrayList<>(neighbours.values());
     }
 
+    public Map<Direction, Cell> getNeighboursMap() {
+        return new HashMap<>(neighbours);
+    }
+
     /**
      * Returns the position of the cell on the game field
      *

@@ -3,13 +3,12 @@ package com.unexpected.ant.model;
 import com.unexpected.ant.model.entity.*;
 
 /**
- * Default implementation of the {@link EntityVisitor} interface, you should override one or more visit methods with
+ * Default implementation of the EntityVisitor interface, you should override one or more visit methods with
  * your custom implementations
  */
 public abstract class EntityVisitorAdapter implements EntityVisitor {
     @Override
     public void visit(Entity entity) {
-
     }
 
     @Override
@@ -32,4 +31,7 @@ public abstract class EntityVisitorAdapter implements EntityVisitor {
     public void visit(Food food) {
     }
 
+    @Override
+    public void visit(Stone stone) {
+    }
 }

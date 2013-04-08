@@ -1,5 +1,7 @@
 package com.unexpected.ant.model;
 
+import java.util.Arrays;
+
 /**
  * Directions on the game field
  */
@@ -27,5 +29,21 @@ public enum Direction {
                 return SOUTHEAST;
         }
         return NORTH;
+    }
+
+    public int value() {
+        return Arrays.binarySearch(values(), this);
+    }
+
+    public Direction addRelativeDirection(RelativeDirection direction) {
+        int dir = value();
+        int relativeDir = direction.value();
+        return values()[(dir + relativeDir) % values().length];
+    }
+
+    public RelativeDirection getRelativeDirectionTo(Direction direction) {
+        int thisDirection = value();
+        int paramDirection = direction.value();
+        return RelativeDirection.values()[(values().length + paramDirection - thisDirection) % values().length];
     }
 }

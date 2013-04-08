@@ -1,5 +1,7 @@
 package com.unexpected.ant.model;
 
+import com.unexpected.ant.model.entity.Echidna;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +32,11 @@ public abstract class AbstractEntity implements Entity, Dynamic {
     @Override
     public boolean canBeOnSameCellWith(Entity entity) {
         printCurrentMethod(this);
+        return true;
+    }
+
+    @Override
+    public boolean canBeSteppedOnBy(Echidna entity) {
         return true;
     }
 

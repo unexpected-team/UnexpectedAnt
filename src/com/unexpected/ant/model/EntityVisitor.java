@@ -18,4 +18,6 @@ public interface EntityVisitor {
     void visit(FoodSmell foodSmell);
 
     void visit(Food food);
+
+    void visit(Stone stone);
 }

@@ -1,14 +1,16 @@
 package com.unexpected.ant.model.entity;
 
-import com.unexpected.ant.model.*;
+import com.unexpected.ant.model.Cell;
+import com.unexpected.ant.model.Direction;
+import com.unexpected.ant.model.EntityVisitor;
+import com.unexpected.ant.model.EntityVisitorAdapter;
 
 import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
 
 /**
  * This class represents an ant in the game.
  */
-public class Ant extends AbstractEntity {
-    private Direction facingDirection;
+public class Ant extends MovingEntity {
     private Food food;
 
     /**
@@ -17,7 +19,7 @@ public class Ant extends AbstractEntity {
      * @param facingDirection The original facing direction of the ant
      */
     public Ant(Direction facingDirection) {
-        this.facingDirection = facingDirection;
+        super(facingDirection);
     }
 
     @Override
@@ -52,80 +54,16 @@ public class Ant extends AbstractEntity {
         return food != null;
     }
 
-    /**
-     * The ant moves
-     */
-    public void move() {
-        printCurrentMethod(this);
-        remove();
-        Cell nextCell = decideNextCell();
-        moveTo(nextCell);
+    public double rateCell(Cell cell, Direction direction) {
+        int directionValue = direction.getRelativeDirectionTo(getFacingDirection()).value();
+        double weight = Math.abs(directionValue - Direction.values().length / 2) / 3.0;
+        SmellVisitor smellVisitor = new SmellVisitor();
+        cell.visitEntities(smellVisitor);
+        return weight * smellVisitor.getSmell();
     }
 
-    /**
-     * The ant moves to the given cell
-     *
-     * @param cell The moves to this cell
-     */
-    public void moveTo(Cell cell) {
-        printCurrentMethod(this);
-        this.remove();
-        cell.addEntity(this);
-        this.cells.clear();
-        this.cells.add(cell);
-
-    }
-
-    /**
-     * The ant decides the next cell to be moved on to
-     *
-     * @return The cell
-     */
-    protected Cell decideNextCell() {
-        printCurrentMethod(this);
-        Cell nextCell = getCell();
-        for (Cell cell : getCell().getNeighbours()) {
-            if (cell.canBeSteppedOnBy(this)) {
-                nextCell = cell;
-            }
-        }
-
-        return nextCell;
-
-    }
-
-    /**
-     * @return The facing direction
-     */
-    public Direction getFacingDirection() {
-        printCurrentMethod(this);
-        return facingDirection;
-    }
-
-    /**
-     * Sets the facing direction
-     *
-     * @param facingDirection
-     */
-    public void setFacingDirection(Direction facingDirection) {
-        printCurrentMethod(this);
-        this.facingDirection = facingDirection;
-    }
-
-    /**
-     * This class is for smelling the surrounding cells
-     */
-    protected class SmellVisitor extends EntityVisitorAdapter {
-        //TODO: hogyan számoljuk, hogy merre menjen
-        @Override
-        public void visit(FoodSmell smell) {
-
-        }
-
-        @Override
-        public void visit(AntSmell smell) {
-
-        }
+    public void createSmell() {
+        getCell().addEntity(new AntSmell(this));
     }
 
     /**
@@ -140,4 +78,18 @@ public class Ant extends AbstractEntity {
             }
         }
     }
+
+    class SmellVisitor extends com.unexpected.ant.model.entity.SmellVisitor {
+
+        @Override
+        public void visit(FoodSmell foodSmell) {
+            smell += foodSmell.getIntensity() * 2;
+        }
+
+        @Override
+        public void visit(AntSmell antSmell) {
+            smell += antSmell.getIntensity();
+        }
+    }
+
 }

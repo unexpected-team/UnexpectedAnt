@@ -1,13 +1,18 @@
 package com.unexpected.ant.model.entity;
 
-import com.unexpected.ant.model.*;
+import com.unexpected.ant.model.Cell;
+import com.unexpected.ant.model.Direction;
+import com.unexpected.ant.model.EntityVisitor;
+import com.unexpected.ant.model.EntityVisitorAdapter;
+
+import java.util.Map;
 
 import static com.unexpected.ant.skeleton_test.OutputHelper.printCurrentMethod;
 
 /**
  * This class represents the echidna which moves on the game field and eats ants.
  */
-public class Echidna extends AbstractEntity {
+public class Echidna extends MovingEntity {
     private int hunger;
 
     private int sleepCounter;
@@ -15,7 +20,7 @@ public class Echidna extends AbstractEntity {
     private Direction facingDirection;
 
     public Echidna(Direction facingDirection) {
-        this.facingDirection = facingDirection;
+        super(facingDirection);
     }
 
     @Override
@@ -91,7 +96,19 @@ public class Echidna extends AbstractEntity {
      */
     public Cell decideNextCell() {
         printCurrentMethod(this);
+        for (Map.Entry<Direction, Cell> neighbour : getCell().getNeighboursMap().entrySet()) {
+            Direction direction = neighbour.getKey();
+            Cell cell = neighbour.getValue();
+//            MoveVisitor visitor = new MoveVisitor();
+            cell.getNeighbour(direction);
+        }
+
         return getCell().getNeighbours().get(0);
+    }
+
+    @Override
+    public double rateCell(Cell cell, Direction direction) {
+        return 1;
     }
 
     /**
@@ -128,4 +145,11 @@ public class Echidna extends AbstractEntity {
         }
     }
 
+    protected class SmellVisitor extends com.unexpected.ant.model.entity.SmellVisitor {
+
+        @Override
+        public void visit(AntSmell antSmell) {
+            smell += antSmell.getIntensity() * 2;
+        }
+    }
 }
