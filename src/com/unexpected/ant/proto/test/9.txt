@@ -1,0 +1,13 @@
+loadMap mapfile1.map
+put Ant c1
+a1.setFacingDirection c5
+put Ant c2
+a2.setFacingDirection c6
+put Ant c4
+a3.setFacingDirection c8
+put Food c7
+f1.createSmell
+step 20
+getOutput
+getStatus fs1
+getStatus a3

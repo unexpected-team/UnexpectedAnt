@@ -1,0 +1,3 @@
+loadMap mapfile1.map
+put Obstacle c7
+getOutput

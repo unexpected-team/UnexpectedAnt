@@ -1,0 +1,4 @@
+loadMap mapfile1.map
+put Ant c7
+getOutput
+getStatus a1

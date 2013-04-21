@@ -1,0 +1,8 @@
+loadMap mapfile1.map
+put Ant c1
+killerSprayUse c1
+step 10
+put Ant c13
+step 20
+getOutput
+getStatus ks1

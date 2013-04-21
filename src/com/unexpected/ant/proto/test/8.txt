@@ -1,0 +1,10 @@
+loadMap mapfile1.map
+put Echidna c1
+put Echidna c9
+put Stone c2
+put Stone c10
+put Stone c11
+e1.setFacingDirection  c2
+e2.setFacingDirection c10
+step 16
+getOutput

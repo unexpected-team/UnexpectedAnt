@@ -1,0 +1,9 @@
+loadMap mapfile1.map
+put Ant c1
+a1.setFacingDirection c2
+Step a1 20
+deodorantSprayUse c2
+a1.setFacingDirection c2
+Step 22
+getOutput
+getStatus ds1

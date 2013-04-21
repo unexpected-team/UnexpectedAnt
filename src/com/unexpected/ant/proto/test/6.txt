@@ -1,0 +1,10 @@
+loadMap mapfile1.map
+put AntLion c1
+put Echidna c2
+put Echidna c3
+e2.sleep 20
+put Ant c1
+put Ant c2
+put Ant c3 
+step 5
+getOutput

@@ -1,0 +1,11 @@
+loadMap mapfile1.map
+put AntHill c2
+put Echidna c10
+put Food c8
+put Stone c9
+put AntLion c5
+save statefile.sav
+put Stone c12
+put Stone c11
+load statefile.sav
+getOutput

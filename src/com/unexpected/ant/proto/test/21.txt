@@ -1,0 +1,3 @@
+loadMap mapfile1.map
+put AntLion c7
+getOutput

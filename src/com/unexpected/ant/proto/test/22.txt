@@ -1,0 +1,3 @@
+loadMap mapfile1.map
+put AntHill c7
+getOutput

@@ -1,0 +1,6 @@
+loadMap mapfile1.map
+put Ant c1
+a1.setFacingDirection c2
+put Obstacle c2
+step a1 20
+getOutput

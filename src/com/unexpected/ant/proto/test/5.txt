@@ -1,0 +1,7 @@
+loadMap mapfile1.map
+put AntHill c1
+h1.spawn
+a1.setFacingDirection c2
+step 10
+getOutput
+getStatus as1
