@@ -93,5 +93,8 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 	@Override
 	public void setCells(List<Cell> cells) {
 		this.cells = new ArrayList<>(cells);
-	}
+        for (Cell cell : cells) {
+            cell.addEntity(this);
+        }
+    }
 }
