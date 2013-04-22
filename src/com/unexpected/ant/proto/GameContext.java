@@ -5,13 +5,14 @@ import com.unexpected.ant.model.Cell;
 import com.unexpected.ant.model.GameField;
 import com.unexpected.ant.model.entity.*;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * This is a helper class for the proto tests
  */
-public class GameContext {
+public class GameContext implements Serializable {
 	private GameField gameField = new GameField();
 
 	private Map<Object, String> objectNames = new HashMap<>();
@@ -78,5 +79,12 @@ public class GameContext {
 
 	public void setTimer(Timer timer) {
 		this.timer = timer;
+	}
+
+	public void load(GameContext context) {
+		this.gameField = context.gameField;
+		this.objectNames = context.objectNames;
+		this.objects = context.objects;
+		this.timer = context.timer;
 	}
 }

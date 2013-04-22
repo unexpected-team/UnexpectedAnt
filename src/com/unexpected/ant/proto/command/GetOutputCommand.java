@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Command for outputting the current state
+ */
 public class GetOutputCommand extends AbstractCommand {
 	@Override
 	public void execute() throws ParameterNotFoundException {

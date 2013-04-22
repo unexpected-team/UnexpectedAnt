@@ -1,11 +1,12 @@
 package com.unexpected.ant.model;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * This cell represents one unit of the game field
  */
-public class Cell {
+public class Cell implements Serializable {
 	private Set<Entity> entities = new HashSet<>();
 	private Map<Direction, Cell> neighbours = new HashMap<>();
 	private Vector position;

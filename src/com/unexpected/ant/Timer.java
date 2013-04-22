@@ -2,13 +2,14 @@ package com.unexpected.ant;
 
 import com.unexpected.ant.model.Dynamic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * WE LOVE GOLDSCHMIDT
  */
-public class Timer {
+public class Timer implements Serializable {
 	private List<Dynamic> dynamicItems = new ArrayList<>();
 	private volatile boolean stopped = true;
 	private long tick = 0;
