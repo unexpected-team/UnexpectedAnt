@@ -11,14 +11,21 @@ import com.unexpected.ant.model.EntityVisitorAdapter;
 public class Ant extends MovingEntity {
 	private Food food;
 
-	/**
-	 * Constructor
-	 *
-	 * @param facingDirection The original facing direction of the ant
-	 */
-	public Ant(Direction facingDirection) {
+    /**
+     * Constructor
+     *
+     * @param facingDirection The original facing direction of the ant
+     */
+    public Ant(Direction facingDirection) {
 		super(facingDirection);
 	}
+
+    /**
+     * Default constructor with North facing direction
+     */
+    public Ant() {
+        this(Direction.NORTH);
+    }
 
 	@Override
 	public void acceptVisitor(EntityVisitor visitor) {
