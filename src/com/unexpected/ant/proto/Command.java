@@ -1,5 +1,7 @@
 package com.unexpected.ant.proto;
 
+import java.io.PrintStream;
+
 public interface Command {
 	void execute() throws ParameterNotFoundException;
 
@@ -16,4 +18,8 @@ public interface Command {
 	void setParameter(Object name, Object value);
 
 	void setGameContext(GameContext gameContext);
+
+	PrintStream getOutput();
+
+	void setOutput(PrintStream output);
 }

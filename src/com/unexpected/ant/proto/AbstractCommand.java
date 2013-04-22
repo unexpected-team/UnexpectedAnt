@@ -34,10 +34,12 @@ public abstract class AbstractCommand implements Command {
 		return command;
 	}
 
+	@Override
 	public PrintStream getOutput() {
 		return output;
 	}
 
+	@Override
 	public void setOutput(PrintStream output) {
 		this.output = output;
 	}

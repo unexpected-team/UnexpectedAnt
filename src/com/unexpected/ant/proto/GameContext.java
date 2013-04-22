@@ -20,7 +20,9 @@ public class GameContext {
 	private Timer timer = new Timer();
 
 	public void addObject(Object object) {
-		addObjectWithId(generateId(object), object);
+		if (!objects.containsValue(object)) {
+			addObjectWithId(generateId(object), object);
+		}
 	}
 
 	private void addObjectWithId(String s, Object object) {

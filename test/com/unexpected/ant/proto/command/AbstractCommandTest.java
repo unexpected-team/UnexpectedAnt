@@ -8,8 +8,12 @@ import com.unexpected.ant.proto.Command;
 import com.unexpected.ant.proto.GameContext;
 import org.junit.Before;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public abstract class AbstractCommandTest<T extends Command> {
 	protected T command = initCommand();
+	private ByteArrayOutputStream outputStream;
 
 	protected abstract T initCommand();
 
@@ -21,11 +25,17 @@ public abstract class AbstractCommandTest<T extends Command> {
 
 	@Before
 	public void setUp() throws Exception {
+		outputStream = new ByteArrayOutputStream();
+		command.setOutput(new PrintStream(outputStream));
 		command.setGameContext(gameContext);
 		gameContext.addObject(a1);
 		gameContext.addObject(c1);
 		gameContext.addObject(c2);
 		a1.moveTo(c1);
 		c1.addNeighbour(Direction.SOUTH, c2);
+	}
+
+	protected String getOutput() {
+		return outputStream.toString();
 	}
 }
