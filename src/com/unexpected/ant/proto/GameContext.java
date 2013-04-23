@@ -19,7 +19,10 @@ public class GameContext implements Serializable {
 	private Map<Object, String> objectNames = new HashMap<>();
 
 	private Map<String, Object> objects = new HashMap<>();
+
 	private Timer timer = new Timer();
+
+	private boolean ignoreFeedback = false;
 
 	public void addObject(Object object) {
 		if (!objects.containsValue(object)) {
@@ -98,5 +101,13 @@ public class GameContext implements Serializable {
 		objectNames.clear();
 		objects.clear();
 
+	}
+
+	public boolean isIgnoreFeedback() {
+		return ignoreFeedback;
+	}
+
+	public void setIgnoreFeedback(boolean ignoreFeedback) {
+		this.ignoreFeedback = ignoreFeedback;
 	}
 }

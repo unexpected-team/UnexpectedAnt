@@ -28,6 +28,7 @@ public class CommandFactoryImpl implements CommandFactory {
 				new KillerSprayUseCommand(),
 				new LoadCommand(),
 				new LoadMapCommand(),
+				new IgnoreFeedbackCommand(),
 				new PutCommand(),
 				new RemoveCommand(),
 				new RunMethodCommand(),
