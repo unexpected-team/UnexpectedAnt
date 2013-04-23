@@ -10,7 +10,7 @@ public class StepCommand extends AbstractCommand {
 	@Override
 	public void execute() throws ParameterNotFoundException {
 //      running the given number of schedule
-		int steps = (int) getParameter(0, 1);
+		int steps = getParameter(0, 1);
 		for (int i = 0; i < steps; i++) {
 			getGameContext().getTimer().schedule();
 		}
