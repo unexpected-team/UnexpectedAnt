@@ -11,7 +11,8 @@ public abstract class Smell extends AbstractEntity {
     @Override
     public void action(long tickCount) {
         super.action(tickCount);
-        decay();
+        if(tickCount % 12 == 0)
+            decay();
     }
 
     /**

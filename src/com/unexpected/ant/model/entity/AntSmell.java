@@ -8,6 +8,12 @@ import com.unexpected.ant.model.EntityVisitor;
 public class AntSmell extends Smell {
     private Ant ant;
 
+    @Override
+    public void action(long tickCount) {
+        if(tickCount % 10 == 0)
+            decay();
+    }
+
     public AntSmell(Ant ant) {
         this.ant = ant;
     }
