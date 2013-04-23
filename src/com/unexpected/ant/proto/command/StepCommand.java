@@ -16,5 +16,4 @@ public class StepCommand extends AbstractCommand {
 		}
 		getOutput().printf("%d step végrehajtva\n", steps);
 	}
-
 }

@@ -16,8 +16,15 @@ public class StepEntityCommand extends AbstractCommand {
 			getOutput().println("Az megadott objektum nem létezik vagy nem ütemezhető.");
 			return;
 		}
-//      Call it's action with 0 parameter - it will call all of the methods we need to step it by one
-		Dynamic dynamic = (Dynamic) parsed;
-		dynamic.action(0);
+        Dynamic dynamic = (Dynamic) parsed;
+        int param = (int) getParameter(1, 1);
+        if(param == 1) {
+//          Call it's action with 0 parameter - it will call all of the methods we need to step it by one
+		    dynamic.action(0);
+        } else {
+            for(int i = 1; i <= param; i++) {
+                dynamic.action(i);
+            }
+        }
 	}
 }
