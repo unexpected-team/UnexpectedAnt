@@ -1,10 +1,11 @@
 package com.unexpected.ant.proto.command;
 
 import com.unexpected.ant.model.Direction;
+import com.unexpected.ant.model.entity.AntHill;
 import com.unexpected.ant.model.entity.Echidna;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class RunMethodCommandTest extends AbstractCommandTest<RunMethodCommand> {
 
@@ -27,6 +28,20 @@ public class RunMethodCommandTest extends AbstractCommandTest<RunMethodCommand> 
 		command.execute();
 
 		assertEquals(Direction.NORTHWEST, a1.getFacingDirection());
+	}
+
+	@Test
+	public void testExecuteAddReturnedObjectToGameContext() throws Exception {
+		gameContext.reset();
+		AntHill h1 = new AntHill();
+		h1.setCell(c1);
+		gameContext.addObject(h1);
+		command.setParameter("entityId", "h1");
+		command.setParameter("method", "spawn");
+
+		assertNull(gameContext.getObjectById("a1"));
+		command.execute();
+		assertNotNull(gameContext.getObjectById("a1"));
 	}
 
 	@Test
