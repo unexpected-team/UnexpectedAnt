@@ -34,8 +34,10 @@ public class Ant extends MovingEntity {
 
 	@Override
 	public void action(long tickCount) {
-		if (tickCount % 10 == 0)
+		if (tickCount % 10 == 0) {
+            createSmell();
 			move();
+        }
 	}
 
 	/**
