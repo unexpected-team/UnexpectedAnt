@@ -8,9 +8,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+/**
+ * Load a mapfile.map into the game
+ */
 public class LoadCommand extends AbstractCommand {
 	@Override
 	public void execute() throws ParameterNotFoundException {
+//      it's using the GameContext's methods
 		try {
 			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(getStringParameter(0)));
 			GameContext ctx = (GameContext) objectInputStream.readObject();

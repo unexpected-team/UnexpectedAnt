@@ -17,10 +17,13 @@ import java.util.List;
 public class GetOutputCommand extends AbstractCommand {
 	@Override
 	public void execute() throws ParameterNotFoundException {
+//      we need some data first
 		GameField gameField = getGameContext().getGameField();
 		Cell firstCell = null;
 		Cell lastCell = null;
+//      iterate the cells
 		for (Cell cell : gameField.getCells()) {
+//          if it is the first
 			if (firstCell == null)
 				firstCell = cell;
 			lastCell = cell;
