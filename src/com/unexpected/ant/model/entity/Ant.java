@@ -9,7 +9,7 @@ import com.unexpected.ant.model.EntityVisitorAdapter;
  * This class represents an ant in the game.
  */
 public class Ant extends MovingEntity {
-	private Food food;
+	private boolean hasFood = false;
 
 	/**
 	 * Constructor
@@ -34,27 +34,19 @@ public class Ant extends MovingEntity {
 
 	@Override
 	public void action(long tickCount) {
-		if(tickCount % 10 == 0)
-            move();
+		if (tickCount % 10 == 0)
+			move();
 	}
 
 	/**
 	 * The ant eats if it's hungry
 	 */
 	public void eat() {
-		if (!hasFood()) {
+		if (!hasFood) {
 			getVisitedByEntitiesOnSameCells(new EatVisitor());
 		}
 	}
 
-	/**
-	 * Return whether the ant has food
-	 *
-	 * @return True, if the ant has food, false otherwise
-	 */
-	public boolean hasFood() {
-		return food != null;
-	}
 
 	public double rateCell(Cell cell, Direction direction) {
 		int directionValue = direction.getRelativeDirectionTo(getFacingDirection()).value();
@@ -74,9 +66,9 @@ public class Ant extends MovingEntity {
 	protected class EatVisitor extends EntityVisitorAdapter {
 		@Override
 		public void visit(Food food) {
-			if (!Ant.this.hasFood()) {
+			if (!Ant.this.hasFood) {
 				food.remove();
-				Ant.this.food = food;
+				Ant.this.hasFood = true;
 			}
 		}
 	}

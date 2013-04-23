@@ -50,6 +50,18 @@ public abstract class AbstractCommand implements Command {
 		return parameters.get(name);
 	}
 
+	public <T> T getParameter(Object name, Class<T> requiredType) throws ParameterNotFoundException {
+		return parse(getStringParameter(name), requiredType);
+	}
+
+	protected <T> T getParameter(Object name, T defaultVal) {
+		try {
+			return hasParameter(name) ? (T) getParameter(name) : defaultVal;
+		} catch (ParameterNotFoundException e) {
+			throw new IllegalStateException();
+		}
+	}
+
 	public boolean hasParameter(Object name) {
 		return parameters.containsKey(name);
 	}
@@ -135,11 +147,4 @@ public abstract class AbstractCommand implements Command {
 		}
 	}
 
-	protected Object getParameter(Object name, Object defaultVal) {
-		try {
-			return hasParameter(name) ? getParameter(name) : defaultVal;
-		} catch (ParameterNotFoundException e) {
-			throw new IllegalStateException();
-		}
-	}
 }
