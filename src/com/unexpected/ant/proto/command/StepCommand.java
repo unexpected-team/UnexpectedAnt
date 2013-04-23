@@ -10,9 +10,11 @@ public class StepCommand extends AbstractCommand {
 	@Override
 	public void execute() throws ParameterNotFoundException {
 //      running the given number of schedule
-		for (int i = 0; i < (int) getParameter(0, 1); i++) {
+		int steps = (int) getParameter(0, 1);
+		for (int i = 0; i < steps; i++) {
 			getGameContext().getTimer().schedule();
 		}
+		getOutput().printf("%d step végrehajtva\n", steps);
 	}
 
 }
