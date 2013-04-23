@@ -16,9 +16,12 @@ import java.util.List;
 public class GetMethodsCommand extends AbstractCommand {
 	@Override
 	public void execute() throws ParameterNotFoundException {
+//      If the object does not exist
 		if (getGameContext().getObjectById(getStringParameter(0)) == null) {
 			getOutput().println("Nem létező objektum.");
+            return;
 		}
+//      Sort it in abc order
 		List<Method> methods = Arrays.asList(parse(getStringParameter(0)).getClass().getMethods());
 		Collections.sort(methods, new Comparator<Method>() {
 			@Override
@@ -26,8 +29,10 @@ public class GetMethodsCommand extends AbstractCommand {
 				return o1.getName().compareTo(o2.getName());
 			}
 		});
-		for (Method method : methods) {
+//		Iterate and print out the methods
+        for (Method method : methods) {
 			getOutput().printf("%s%s(", getVisibilityCharacter(method), method.getName());
+//          If it is the first parameter, don't need to print a coma, else it do
 			boolean first = true;
 			for (Class<?> type : method.getParameterTypes()) {
 				getOutput().printf("%s%s", first ? "" : ", ", type.getSimpleName());
@@ -39,17 +44,18 @@ public class GetMethodsCommand extends AbstractCommand {
 
 	}
 
+//  Get the visibility of the method
 	private char getVisibilityCharacter(Method method) {
-		//private
+//		private
 		if (Modifier.isPrivate(method.getModifiers()))
 			return '-';
-		//protected
+//		protected
 		if (Modifier.isProtected(method.getModifiers()))
 			return '#';
-		//public
+//		public
 		if (Modifier.isPublic(method.getModifiers()))
 			return '+';
-		// package
+//		package
 		return '~';
 	}
 }

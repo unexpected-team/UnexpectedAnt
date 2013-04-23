@@ -127,4 +127,34 @@ public class Cell implements Serializable {
 			}
 		}
 	}
+
+    /**
+     * Get the direction of the given cell based the current cell (only if it is it's neighbour)
+     *
+     * @param cell
+     * @return the Direction
+     */
+    public Direction getNeighbourDirection(Cell cell) {
+        if(!this.getNeighbours().contains(cell)) {
+            return null;
+        }
+        return getKeyByValueInNeighbourMap(this.getNeighboursMap(), cell);
+    }
+
+    /**
+     * Get the key in neighbours hash map based on the given value
+     * @param map
+     * @param value
+     * @param <T>
+     * @param <E>
+     * @return the direction of the cell
+     */
+    public static <T, E> T getKeyByValueInNeighbourMap(Map<T, E> map, E value) {
+        for(Map.Entry entry : map.entrySet()) {
+            if(value.equals(entry.getValue())) {
+                return (T)entry.getKey();
+            }
+        }
+        return null;
+    }
 }

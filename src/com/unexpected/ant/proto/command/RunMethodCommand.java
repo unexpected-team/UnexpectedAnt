@@ -22,7 +22,7 @@ public class RunMethodCommand extends AbstractCommand {
 
 		try {
 			Method method = entityClass.getMethod(getStringParameter("method"), getParameterClasses());
-//					invoke the method and store the return value
+//			invoke the method and store the return value
 			Object returnValue = method.invoke(entity, parameters.toArray());
 //			uncomment this if you want to output the return value
 			getOutput().printf("Sikeres futtatás! Visszatérési érték: %s\n", String.valueOf(returnValue));
@@ -31,8 +31,6 @@ public class RunMethodCommand extends AbstractCommand {
 		} catch (InvocationTargetException | IllegalAccessException e) {
 			getOutput().println("Hiba történt a metódus meghívásakor.");
 		}
-
-
 	}
 
 	private Class[] getParameterClasses() {

@@ -5,14 +5,23 @@ import com.unexpected.ant.model.entity.DeodorantSpraySmell;
 import com.unexpected.ant.proto.AbstractCommand;
 import com.unexpected.ant.proto.ParameterNotFoundException;
 
+/**
+ * Command for using a deodorant spray - put DeodorantSpraySmell on the specified cell and on it's neighbours
+ */
 public class DeodorantSprayUseCommand extends AbstractCommand {
 	@Override
 	public void execute() throws ParameterNotFoundException {
 		Cell cell = parse(getStringParameter(0), Cell.class);
-		if (cell != null) {
+//		If the cell is not null...
+        if (cell != null) {
+//          ... create a DeodorantSpraySmell
 			DeodorantSpraySmell deodorantSpraySmell = new DeodorantSpraySmell();
 			getGameContext().addObject(deodorantSpraySmell);
+//          ... and add it to the cell and it's neighbours
 			cell.addEntity(deodorantSpraySmell);
-		}
+            for (Cell neighbourCell : cell.getNeighbours()) {
+                neighbourCell.addEntity(deodorantSpraySmell);
+            }
+        }
 	}
 }
