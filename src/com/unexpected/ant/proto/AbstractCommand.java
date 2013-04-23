@@ -27,8 +27,7 @@ public abstract class AbstractCommand implements Command {
 
 	@Override
 	public String getName() {
-		String className = getClass().getName(); // eg. com.unexpected.ant.proto.command.LoadMapCommand
-		className = className.substring(className.lastIndexOf(".")); //LoadMapCommand
+		String className = getClass().getSimpleName(); // eg. LoadMapCommand
 		String command = className.replace("Command", ""); //LoadMap
 		command = Character.toLowerCase(command.charAt(0)) + command.substring(1); //loadMap
 		return command;
@@ -78,57 +77,66 @@ public abstract class AbstractCommand implements Command {
 	 */
 	public Object parse(String parameter) {
 //	    try to parse it as an enum
-        try {
-            return Direction.valueOf(parameter);
-        } catch (IllegalArgumentException ignored) {
-        }
+		try {
+			return Direction.valueOf(parameter);
+		} catch (IllegalArgumentException ignored) {
+		}
 
-        try {
-            return RelativeDirection.valueOf(parameter);
-        } catch (IllegalArgumentException ignored) {
-        }
+		try {
+			return RelativeDirection.valueOf(parameter);
+		} catch (IllegalArgumentException ignored) {
+		}
 
-        try {
-            return ObstacleType.valueOf(parameter);
-        } catch (IllegalArgumentException ignored) {
-        }
+		try {
+			return ObstacleType.valueOf(parameter);
+		} catch (IllegalArgumentException ignored) {
+		}
 
 //      Try to parse it as a new instance
-        try {
-            Object newInstance = Class.forName("com.unexpected.ant.model.entity." + parameter).newInstance();
-            getGameContext().addObject(newInstance);
-            return newInstance;
-        } catch (Exception ignored) {
-        }
+		try {
+			Object newInstance = Class.forName("com.unexpected.ant.model.entity." + parameter).newInstance();
+			getGameContext().addObject(newInstance);
+			return newInstance;
+		} catch (Exception ignored) {
+		}
 
 //		try to parse it as an entity
-        Object entityById = getGameContext().getObjectById(parameter);
-        if (entityById != null) {
-            return entityById;
-        }
+		Object entityById = getGameContext().getObjectById(parameter);
+		if (entityById != null) {
+			return entityById;
+		}
 
 //		try to parse it as an integer
-        try {
-            return Integer.parseInt(parameter);
-        } catch (NumberFormatException ignored) {
+		try {
+			return Integer.parseInt(parameter);
+		} catch (NumberFormatException ignored) {
 		}
 
 //		fallback as a string
 		return parameter;
 	}
 
-    /**
-     * Type forcing to T
-     * If type is not T print an error, else return with the parsed parameter
-     * @return the parsed object is null when error
-     */
-    public <T> T parse(String paramter, Class<T> castType){
-        Object ob = parse(paramter);
-        if(!(castType.isAssignableFrom(ob.getClass()))) {
-            getOutput().println("Hiba, nem létező típus.");
-            return null;
-        } else {
-            return (T)ob;
-        }
-    }
+	/**
+	 * Type forcing to T
+	 * If type is not T print an error, else return with the parsed parameter
+	 *
+	 * @return the parsed object is null when error
+	 */
+	public <T> T parse(String paramter, Class<T> castType) {
+		Object ob = parse(paramter);
+		if (!(castType.isAssignableFrom(ob.getClass()))) {
+			getOutput().println("Hiba, nem létező típus.");
+			return null;
+		} else {
+			return (T) ob;
+		}
+	}
+
+	protected Object getParameter(Object name, Object defaultVal) {
+		try {
+			return hasParameter(name) ? getParameter(name) : defaultVal;
+		} catch (ParameterNotFoundException e) {
+			throw new IllegalStateException();
+		}
+	}
 }

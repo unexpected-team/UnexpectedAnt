@@ -3,14 +3,14 @@ package com.unexpected.ant;
 import com.unexpected.ant.model.Dynamic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * WE LOVE GOLDSCHMIDT
  */
 public class Timer implements Serializable {
-	private List<Dynamic> dynamicItems = new ArrayList<>();
+	private Set<Dynamic> dynamicItems = new HashSet<>();
 	private volatile boolean stopped = true;
 	private long tick = 0;
 
@@ -56,5 +56,9 @@ public class Timer implements Serializable {
 
 	public long getTick() {
 		return tick;
+	}
+
+	public void clear() {
+		dynamicItems.clear();
 	}
 }

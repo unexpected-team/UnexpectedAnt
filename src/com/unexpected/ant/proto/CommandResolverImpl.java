@@ -22,7 +22,8 @@ public class CommandResolverImpl implements CommandResolver {
 					command.setParameter(split[i].substring(1), true);
 				}
 			} else {
-				command.setParameter(Integer.toString(counter), split[i]);
+				command.setParameter(counter, split[i]);
+				counter++;
 			}
 		}
 		return command;

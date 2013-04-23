@@ -12,19 +12,20 @@ import java.util.Arrays;
  */
 public class PutCommand extends AbstractCommand {
 
-    @Override
-    public void execute() throws ParameterNotFoundException {
-        String name = getStringParameter(0);
-        Object newInstance = parse(name);
-        if (!(newInstance instanceof Entity)) {
-            getOutput().println("Hiba, nem létező Entity.");
-            return;
-        }
-        Object cell = parse(getStringParameter(1));
-        if(!(cell instanceof Cell)) {
-            getOutput().println("Hiba, nem létező cella.");
-            return;
-        }
-        ((Entity) newInstance).setCells(Arrays.asList((Cell) cell));
-    }
+	@Override
+	public void execute() throws ParameterNotFoundException {
+		String name = getStringParameter(0);
+		Object newInstance = parse(name);
+		if (!(newInstance instanceof Entity)) {
+			getOutput().println("Hiba, nem létező Entity.");
+			return;
+		}
+		Object cell = parse(getStringParameter(1));
+		if (!(cell instanceof Cell)) {
+			getOutput().println("Hiba, nem létező cella.");
+			return;
+		}
+		((Entity) newInstance).setCells(Arrays.asList((Cell) cell));
+		getOutput().printf("%s elhelyezve\n", getGameContext().getObjectId(newInstance));
+	}
 }

@@ -1,58 +1,40 @@
 package com.unexpected.ant;
 
-import com.unexpected.ant.skeleton_test.TestCase;
-import com.unexpected.ant.skeleton_test.TestDoesNotExistException;
-import com.unexpected.ant.skeleton_test.TestRunner;
-import com.unexpected.ant.skeleton_test.test.*;
+import com.unexpected.ant.proto.*;
+import com.unexpected.ant.proto.command.ExitRequestedException;
 
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    TestRunner testRunner = new TestRunner();
+	CommandResolver commandResolver;
 
-    public static void main(String[] args) {
-        new Main();
-    }
+	public static void main(String[] args) {
+		new Main();
+	}
 
-    public Main() {
-        addTestCases();
-        while (true) {
-            displayTestCases();
-            System.out.print("Írd be a teszteset számát(0=kilép): ");
-            Scanner scanner = new Scanner(System.in);
-            int testCase = scanner.nextInt();
-            //exit on 0
-            if (testCase == 0) {
-                break;
-            }
-            try {
-                // try to run the test
-                testRunner.run(testCase - 1);
-            } catch (TestDoesNotExistException e) {
-                // if test does not exist
-                System.out.println("Ilyen teszt nem létezik");
-            }
-        }
-    }
+	public Main() {
+		commandResolver = new CommandResolverImpl(new CommandFactoryImpl(new GameContext()));
+		InputStreamReader converter = new InputStreamReader(System.in);
+		BufferedReader in = new BufferedReader(converter);
+		try {
+			while (true) {
 
-    private void addTestCases() {
-        testRunner.addTestCase(new BuildGameField());
-        testRunner.addTestCase(new AntMoves());
-        testRunner.addTestCase(new EchidnaMoves());
-        testRunner.addTestCase(new AntEncountersObstacle());
-        testRunner.addTestCase(new EchidnaEatsAnt());
-        testRunner.addTestCase(new AntLionEatsAnt());
-        testRunner.addTestCase(new AntEatsFood());
-        testRunner.addTestCase(new KillerSprayKillsAnt());
-        testRunner.addTestCase(new DeodorantSprayRemovesAntSmell());
-    }
+				try {
+					Command command = commandResolver.resolve(in.readLine());
+					command.execute();
+				} catch (CommandNotFoundException e) {
+					System.out.println("Nem létező parancs");
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (ParameterNotFoundException e) {
+					System.out.println("Paraméter hiányzik: " + e.getParameterName());
+				}
+			}
+		} catch (ExitRequestedException exit) {
 
-    public void displayTestCases() {
-        List<TestCase> testCases = testRunner.getTestCases();
-        for (int i = 0; i < testCases.size(); i++) {
-            TestCase testCase = testCases.get(i);
-            System.out.printf("%d. %s\n", i + 1, testCase.getName());
-        }
-    }
+		}
+	}
+
 }

@@ -25,9 +25,9 @@ public class RunMethodCommand extends AbstractCommand {
 //					invoke the method and store the return value
 			Object returnValue = method.invoke(entity, parameters.toArray());
 //			uncomment this if you want to output the return value
-//			getOutput().printf("Sikeres futtatás! Visszatérési érték: %s\n", String.valueOf(returnValue));
+			getOutput().printf("Sikeres futtatás! Visszatérési érték: %s\n", String.valueOf(returnValue));
 		} catch (NoSuchMethodException e) {
-			getOutput().println("A keresett metódus nem létezik (lehet, hogy hibás paramétereket vagy metódusnevet adtál meg.");
+			getOutput().println("A keresett metódus nem létezik (lehet, hogy hibás paramétereket vagy metódusnevet adtál meg).");
 		} catch (InvocationTargetException | IllegalAccessException e) {
 			getOutput().println("Hiba történt a metódus meghívásakor.");
 		}

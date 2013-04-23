@@ -11,21 +11,21 @@ import com.unexpected.ant.model.EntityVisitorAdapter;
 public class Ant extends MovingEntity {
 	private Food food;
 
-    /**
-     * Constructor
-     *
-     * @param facingDirection The original facing direction of the ant
-     */
-    public Ant(Direction facingDirection) {
+	/**
+	 * Constructor
+	 *
+	 * @param facingDirection The original facing direction of the ant
+	 */
+	public Ant(Direction facingDirection) {
 		super(facingDirection);
 	}
 
-    /**
-     * Default constructor with North facing direction
-     */
-    public Ant() {
-        this(Direction.NORTH);
-    }
+	/**
+	 * Default constructor with North facing direction
+	 */
+	public Ant() {
+		this(Direction.NORTH);
+	}
 
 	@Override
 	public void acceptVisitor(EntityVisitor visitor) {
@@ -60,7 +60,7 @@ public class Ant extends MovingEntity {
 		double weight = Math.abs(directionValue - Direction.values().length / 2) / 3.0;
 		SmellVisitor smellVisitor = new SmellVisitor();
 		cell.visitEntities(smellVisitor);
-		return weight * smellVisitor.getSmell();
+		return weight * (1 + smellVisitor.getSmell());
 	}
 
 	public void createSmell() {

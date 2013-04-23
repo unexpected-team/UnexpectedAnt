@@ -16,6 +16,7 @@ public class LoadCommand extends AbstractCommand {
 			GameContext ctx = (GameContext) objectInputStream.readObject();
 			getGameContext().load(ctx);
 			objectInputStream.close();
+			getOutput().println("Sikeres betöltés.");
 		} catch (IOException | ClassNotFoundException e) {
 			getOutput().println("Hiba történt a betöltéskor");
 		}
