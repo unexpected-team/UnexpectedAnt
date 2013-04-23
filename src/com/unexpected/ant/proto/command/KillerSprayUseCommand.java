@@ -19,8 +19,8 @@ public class KillerSprayUseCommand extends AbstractCommand {
 			getGameContext().addObject(killerSpraySmell);
 //          ... and put it on the cell and it's neighbours
 			cell.addEntity(killerSpraySmell);
-            for (Cell neightbourCell : cell.getNeighbours()) {
-                neightbourCell.addEntity(killerSpraySmell);
+            for (Cell neighbourCell : cell.getNeighbours()) {
+                neighbourCell.addEntity(killerSpraySmell);
             }
         }
 	}
