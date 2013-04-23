@@ -52,6 +52,7 @@ public class RunMethodCommand extends AbstractCommand {
 			if (!getGameContext().isIgnoreFeedback()) {
 				getOutput().printf("Sikeres futtatás! Visszatérési érték: %s\n", String.valueOf(returnValue));
 			}
+			getGameContext().addObject(returnValue);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			getOutput().println("Hiba történt a metódus meghívásakor.");
 		}

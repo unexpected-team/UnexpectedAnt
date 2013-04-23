@@ -25,8 +25,9 @@ public class GameContext implements Serializable {
 	private boolean ignoreFeedback = false;
 
 	public void addObject(Object object) {
-		if (!objects.containsValue(object)) {
-			addObjectWithId(generateId(object), object);
+		String id = generateId(object);
+		if (!objects.containsValue(object) && id != null) {
+			addObjectWithId(id, object);
 			if (object instanceof Dynamic) {
 				timer.add((Dynamic) object);
 			}
@@ -55,7 +56,9 @@ public class GameContext implements Serializable {
 				put(Obstacle.class, "o");
 			}
 		};
-
+		if (object == null || !classIds.containsKey(object.getClass())) {
+			return null;
+		}
 		String prefix = classIds.get(object.getClass());
 		int i = 1;
 		while (getObjectById(prefix + i) != null) {
