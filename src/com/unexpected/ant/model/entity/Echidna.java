@@ -11,8 +11,7 @@ import java.util.Map;
  * This class represents the echidna which moves on the game field and eats ants.
  */
 public class Echidna extends MovingEntity {
-	private int hunger;
-
+	private int hunger = 5;
 	private int sleepCounter;
 
 	private Direction facingDirection;
@@ -27,7 +26,6 @@ public class Echidna extends MovingEntity {
 
 	@Override
 	public void action(long tickCount) {
-		super.action(tickCount);
 		if (isHungry()) {
 			eat();
 		}
