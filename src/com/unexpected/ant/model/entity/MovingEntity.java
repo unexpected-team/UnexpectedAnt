@@ -33,6 +33,21 @@ public abstract class MovingEntity extends AbstractEntity {
 		this.facingDirection = facingDirection;
 	}
 
+    /**
+     * Sets the facing direction to (current cell -> param cell) direction
+     *
+     * @param cell
+     */
+    public void setFacingDirection(Cell cell) {
+        if(this.getCells().size() != 1) {
+            throw new UnsupportedOperationException("Csak olyan entitásra használható, ami egyszerre egy cellán tartózkodik.");
+        }
+        Direction newFacingDirection = this.getCell().getNeighbourDirection(cell);
+        if(newFacingDirection != null) {
+            this.setFacingDirection(newFacingDirection);
+        }
+    }
+
 	/**
 	 * The entity moves
 	 */
