@@ -1,6 +1,7 @@
 package com.unexpected.ant.proto.command;
 
 import com.unexpected.ant.model.Direction;
+import com.unexpected.ant.model.entity.Echidna;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,6 +27,18 @@ public class RunMethodCommandTest extends AbstractCommandTest<RunMethodCommand> 
 		command.execute();
 
 		assertEquals(Direction.NORTHWEST, a1.getFacingDirection());
+	}
+
+	@Test
+	public void testIntegerToIntConversion() throws Exception {
+		Echidna e1 = new Echidna();
+		assert !e1.isAsleep();
+		gameContext.addObject(e1);
+		command.setParameter("entityId", "e1");
+		command.setParameter("method", "sleep");
+		command.setParameter(0, "4");
+		command.execute();
+		assert e1.isAsleep();
 	}
 
 	@Test

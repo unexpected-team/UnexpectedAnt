@@ -56,11 +56,14 @@ public abstract class AbstractCommand implements Command {
 
 	@Override
 	public String getStringParameter(Object name) throws ParameterNotFoundException {
-		return (String) getParameter(name);
+		if (parameters.get(name) instanceof String) {
+			return (String) parameters.get(name);
+		}
+		return String.valueOf(parameters.get(name));
 	}
 
 	public Object getParameter(Object name) throws ParameterNotFoundException {
-		return getParameter(name, true);
+		return parse(getStringParameter(name));
 	}
 
 	@Override
@@ -122,8 +125,8 @@ public abstract class AbstractCommand implements Command {
 	 *
 	 * @return the parsed object is null when error
 	 */
-	public <T> T parse(String paramter, Class<T> castType) {
-		Object ob = parse(paramter);
+	public <T> T parse(String parameter, Class<T> castType) {
+		Object ob = parse(parameter);
 		if (!(castType.isAssignableFrom(ob.getClass()))) {
 			getOutput().println("Hiba, nem létező típus.");
 			return null;
