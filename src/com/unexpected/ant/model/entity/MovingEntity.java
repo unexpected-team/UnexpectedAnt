@@ -18,6 +18,13 @@ public abstract class MovingEntity extends AbstractEntity {
 	}
 
 	/**
+	 * Default constructor with North facing direction
+	 */
+	public MovingEntity() {
+		this(Direction.NORTH);
+	}
+
+	/**
 	 * @return The facing direction
 	 */
 	public Direction getFacingDirection() {

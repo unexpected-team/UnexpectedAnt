@@ -24,7 +24,7 @@ public class Ant extends MovingEntity {
 	 * Default constructor with North facing direction
 	 */
 	public Ant() {
-		this(Direction.NORTH);
+		super();
 	}
 
 	@Override

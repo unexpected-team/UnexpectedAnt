@@ -21,6 +21,10 @@ public class Echidna extends MovingEntity {
 		super(facingDirection);
 	}
 
+	public Echidna() {
+		super();
+	}
+
 	@Override
 	public void action(long tickCount) {
 		super.action(tickCount);
