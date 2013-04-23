@@ -32,7 +32,7 @@ public class RunMethodCommand extends AbstractCommand {
 										parameters.get(i).getClass().getDeclaredField("TYPE").get(parameters.get(i)).equals(m.getParameterTypes()[i]))) {
 							continue methodSearch;
 						}
-					} catch (IllegalAccessException | NoSuchFieldException e) {
+					} catch (IllegalAccessException | NoSuchFieldException ignored) {
 					}
 				}
 				// we found the proper method
@@ -49,18 +49,12 @@ public class RunMethodCommand extends AbstractCommand {
 //			invoke the method and store the return value
 			Object returnValue = method.invoke(entity, parameters.toArray());
 //			uncomment this if you want to output the return value
-			getOutput().printf("Sikeres futtatás! Visszatérési érték: %s\n", String.valueOf(returnValue));
+			if (!getGameContext().isIgnoreFeedback()) {
+				getOutput().printf("Sikeres futtatás! Visszatérési érték: %s\n", String.valueOf(returnValue));
+			}
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			getOutput().println("Hiba történt a metódus meghívásakor.");
 		}
-	}
-
-	private Class[] getParameterClasses() {
-		List<Class> parameterClasses = new ArrayList<>();
-		for (Object parameter : getMethodParameters()) {
-			parameterClasses.add(parameter.getClass());
-		}
-		return parameterClasses.toArray(new Class[parameterClasses.size()]);
 	}
 
 	/**

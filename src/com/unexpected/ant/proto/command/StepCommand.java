@@ -14,6 +14,8 @@ public class StepCommand extends AbstractCommand {
 		for (int i = 0; i < steps; i++) {
 			getGameContext().getTimer().schedule();
 		}
-		getOutput().printf("%d step végrehajtva\n", steps);
+		if (!getGameContext().isIgnoreFeedback()) {
+			getOutput().printf("%d step végrehajtva\n", steps);
+		}
 	}
 }

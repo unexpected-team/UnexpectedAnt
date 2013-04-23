@@ -19,9 +19,9 @@ public class GetMethodsCommand extends AbstractCommand {
 //      If the object does not exist
 		if (getGameContext().getObjectById(getStringParameter(0)) == null) {
 			getOutput().println("Nem létező objektum.");
-            return;
+			return;
 		}
-//      Sort it in abc order
+//      Sort it in alphabetic order
 		List<Method> methods = Arrays.asList(parse(getStringParameter(0)).getClass().getMethods());
 		Collections.sort(methods, new Comparator<Method>() {
 			@Override
@@ -30,9 +30,9 @@ public class GetMethodsCommand extends AbstractCommand {
 			}
 		});
 //		Iterate and print out the methods
-        for (Method method : methods) {
+		for (Method method : methods) {
 			getOutput().printf("%s%s(", getVisibilityCharacter(method), method.getName());
-//          If it is the first parameter, don't need to print a coma, else it do
+//          If it is the first parameter, don't need to print a coma, else it does
 			boolean first = true;
 			for (Class<?> type : method.getParameterTypes()) {
 				getOutput().printf("%s%s", first ? "" : ", ", type.getSimpleName());
@@ -44,7 +44,13 @@ public class GetMethodsCommand extends AbstractCommand {
 
 	}
 
-//  Get the visibility of the method
+	/**
+	 * Returns the visibility of the method as a character
+	 * private:    -
+	 * public:     +
+	 * protected:  #
+	 * package:    ~
+	 */
 	private char getVisibilityCharacter(Method method) {
 //		private
 		if (Modifier.isPrivate(method.getModifiers()))

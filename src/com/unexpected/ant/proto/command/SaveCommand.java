@@ -18,7 +18,9 @@ public class SaveCommand extends AbstractCommand {
 			ObjectOutputStream saveFile = new ObjectOutputStream(new FileOutputStream(getStringParameter(0)));
 			saveFile.writeObject(getGameContext());
 			saveFile.close();
-			getOutput().println("Sikeres mentés.");
+			if (!getGameContext().isIgnoreFeedback()) {
+				getOutput().println("Sikeres mentés.");
+			}
 		} catch (IOException e) {
 			getOutput().println("Hiba történt a mentéskor.");
 		}
