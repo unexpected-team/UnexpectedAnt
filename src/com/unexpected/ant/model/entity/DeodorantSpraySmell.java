@@ -7,12 +7,6 @@ import com.unexpected.ant.model.EntityVisitorAdapter;
  * the ant smell.
  */
 public class DeodorantSpraySmell extends Smell {
-	@Override
-	public void action(long tickCount) {
-		super.action(tickCount);
-		removeSmell();
-	}
-
 	/**
 	 * Removes smell from the cells onto which the deodorant is blown
 	 */

@@ -31,6 +31,8 @@ public class Echidna extends MovingEntity {
 		if (isHungry()) {
 			eat();
 		}
+        if(tickCount % 8 == 0)
+            move();
 	}
 
 	/**

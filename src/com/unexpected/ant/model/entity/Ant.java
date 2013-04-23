@@ -34,7 +34,8 @@ public class Ant extends MovingEntity {
 
 	@Override
 	public void action(long tickCount) {
-		move();
+		if(tickCount % 10 == 0)
+            move();
 	}
 
 	/**
