@@ -11,7 +11,14 @@ public class StepCommandTest extends AbstractCommandTest<StepCommand> {
 		command.execute();
 
 		assertEquals(3, gameContext.getTimer().getTick());
+		assertEquals("3 step végrehajtva\n", getOutput());
+	}
 
+	@Test
+	public void testExecuteWithoutParams() throws Exception {
+		command.execute();
+
+		assertEquals(1, gameContext.getTimer().getTick());
 	}
 
 
