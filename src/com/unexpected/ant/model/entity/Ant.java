@@ -90,5 +90,4 @@ public class Ant extends MovingEntity {
 			smell += antSmell.getIntensity();
 		}
 	}
-
 }
