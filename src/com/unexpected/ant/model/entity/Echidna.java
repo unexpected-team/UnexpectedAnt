@@ -27,15 +27,15 @@ public class Echidna extends MovingEntity {
 		if (isHungry() && !isAsleep()) {
 			eat();
 		}
-        if (tickCount % 8 == 0 && !isAsleep()) {
-            move();
-        }
-        if (isAsleep() && sleepCounter == 1) {
-            setHunger(5);
-        }
-        if (isAsleep()) {
-            sleepCounter--;
-        }
+		if (tickCount % 8 == 0 && !isAsleep()) {
+			move();
+		}
+		if (sleepCounter == 1) {
+			setHunger(5);
+		}
+		if (isAsleep()) {
+			sleepCounter--;
+		}
 	}
 
 	/**
@@ -144,9 +144,9 @@ public class Echidna extends MovingEntity {
 		public void visit(Ant ant) {
 			hunger--;
 			ant.remove();
-            if (!isHungry()) {
-                sleepCounter = 40;
-            }
+			if (!isHungry()) {
+				sleepCounter = 40;
+			}
 		}
 	}
 
