@@ -56,8 +56,10 @@ public class Ant extends MovingEntity {
 		return weight * (1 + smellVisitor.getSmell());
 	}
 
-	public void createSmell() {
-		getCell().addEntity(new AntSmell(this));
+	public AntSmell createSmell() {
+		AntSmell antSmell = new AntSmell(this);
+		getCell().addEntity(antSmell);
+		return antSmell;
 	}
 
 	/**
