@@ -13,9 +13,9 @@ public class KillerSpraySmell extends Smell {
 
 	@Override
 	public void action(long tickCount) {
-		super.action(tickCount);
-        if(tickCount % 8 == 0)
-            kill();
+        kill();
+        if(tickCount % 12 == 0)
+            decay();
 	}
 
 	/**
