@@ -103,7 +103,7 @@ public class Echidna extends MovingEntity {
 		for (Map.Entry<Direction, Cell> neighbour : getCell().getNeighboursMap().entrySet()) {
 			Direction direction = neighbour.getKey();
 			Cell cell = neighbour.getValue();
-//            MoveVisitor visitor = new MoveVisitor();
+//          MoveVisitor visitor = new MoveVisitor();
 			cell.getNeighbour(direction);
 		}
 
