@@ -6,10 +6,15 @@ import com.unexpected.ant.model.EntityVisitorAdapter;
  * This class represent the killer spray which kills the ants of the same cells
  */
 public class KillerSpraySmell extends Smell {
+
+    public KillerSpraySmell() {
+        setIntensity(5);
+    }
+
 	@Override
 	public void action(long tickCount) {
 		super.action(tickCount);
-        if(tickCount % 12 == 0)
+        if(tickCount % 8 == 0)
             kill();
 	}
 

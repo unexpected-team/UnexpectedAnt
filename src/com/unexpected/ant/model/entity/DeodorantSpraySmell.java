@@ -7,6 +7,10 @@ import com.unexpected.ant.model.EntityVisitorAdapter;
  * the ant smell.
  */
 public class DeodorantSpraySmell extends Smell {
+
+    public DeodorantSpraySmell() {
+        setIntensity(5);
+    }
 	/**
 	 * Removes smell from the cells onto which the deodorant is blown
 	 */
