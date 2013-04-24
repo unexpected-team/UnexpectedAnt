@@ -14,8 +14,6 @@ public class Echidna extends MovingEntity {
 	private int hunger = 5;
 	private int sleepCounter;
 
-	private Direction facingDirection;
-
 	public Echidna(Direction facingDirection) {
 		super(facingDirection);
 	}
@@ -26,11 +24,18 @@ public class Echidna extends MovingEntity {
 
 	@Override
 	public void action(long tickCount) {
-		if (isHungry()) {
+		if (isHungry() && !isAsleep()) {
 			eat();
 		}
-        if(tickCount % 8 == 0)
+        if (tickCount % 8 == 0 && !isAsleep()) {
             move();
+        }
+        if (isAsleep() && sleepCounter == 1) {
+            setHunger(5);
+        }
+        if (isAsleep()) {
+            sleepCounter--;
+        }
 	}
 
 	/**
@@ -139,6 +144,9 @@ public class Echidna extends MovingEntity {
 		public void visit(Ant ant) {
 			hunger--;
 			ant.remove();
+            if (!isHungry()) {
+                sleepCounter = 40;
+            }
 		}
 	}
 

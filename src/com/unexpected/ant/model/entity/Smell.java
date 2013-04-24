@@ -19,7 +19,10 @@ public abstract class Smell extends AbstractEntity {
      * Decreases the intensity of the smell
      */
     public void decay() {
-
+        intensity--;
+        if (intensity == 0) {
+            //removeSmell from Cells
+        }
     }
 
     /**
