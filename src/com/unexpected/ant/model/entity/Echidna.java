@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class Echidna extends MovingEntity {
 	private int hunger = 5;
-	private int sleepCounter;
+	private int sleepCounter = 0;
 
 	public Echidna(Direction facingDirection) {
 		super(facingDirection);
@@ -134,7 +134,6 @@ public class Echidna extends MovingEntity {
 		cell.addEntity(this);
 		this.cells.clear();
 		this.cells.add(cell);
-
 	}
 
 	/**
