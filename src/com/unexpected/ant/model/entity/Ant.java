@@ -1,5 +1,6 @@
 package com.unexpected.ant.model.entity;
 
+import com.unexpected.ant.GameEngine;
 import com.unexpected.ant.model.Cell;
 import com.unexpected.ant.model.Direction;
 import com.unexpected.ant.model.EntityVisitor;
@@ -18,6 +19,7 @@ public class Ant extends MovingEntity {
 	 */
 	public Ant(Direction facingDirection) {
 		super(facingDirection);
+		view = GameEngine.INSTANCE.getViewFactory().createView(this);
 	}
 
 	/**
@@ -25,6 +27,7 @@ public class Ant extends MovingEntity {
 	 */
 	public Ant() {
 		super();
+		view = GameEngine.INSTANCE.getViewFactory().createView(this);
 	}
 
 	@Override
@@ -34,10 +37,10 @@ public class Ant extends MovingEntity {
 
 	@Override
 	public void action(long tickCount) {
-        eat();
+		eat();
 		if (tickCount % 10 == 0) {
 			move();
-            createSmell();
+			createSmell();
 		}
 	}
 

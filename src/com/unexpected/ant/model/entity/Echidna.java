@@ -1,5 +1,6 @@
 package com.unexpected.ant.model.entity;
 
+import com.unexpected.ant.GameEngine;
 import com.unexpected.ant.model.Cell;
 import com.unexpected.ant.model.Direction;
 import com.unexpected.ant.model.EntityVisitor;
@@ -16,10 +17,12 @@ public class Echidna extends MovingEntity {
 
 	public Echidna(Direction facingDirection) {
 		super(facingDirection);
+		view = GameEngine.INSTANCE.getViewFactory().createView(this);
 	}
 
 	public Echidna() {
 		super();
+		view = GameEngine.INSTANCE.getViewFactory().createView(this);
 	}
 
 	@Override

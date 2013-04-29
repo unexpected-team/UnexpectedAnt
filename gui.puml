@@ -1,0 +1,44 @@
+@startuml
+autonumber
+title Init view in model constructor
+create "ant:Ant"
+-> "ant:Ant":<<create>>
+activate "ant:Ant"
+"ant:Ant" -> ":ViewFactory" : createView(ant)
+activate ":ViewFactory"
+create "antView:AntView"
+":ViewFactory" --> "antView:AntView" : <<create>>
+":ViewFactory" --> "ant:Ant" : antView
+deactivate ":ViewFactory"
+deactivate "ant:Ant"
+@enduml
+
+@startuml
+autonumber
+title Update view from model
+activate ":Ant"
+":Ant" -> ":AntView" : update()
+activate ":AntView"
+":AntView" -> ":AntView" : revalidate()
+activate ":AntView"
+create "g:Graphics"
+":AntView" -> "g:Graphics": <<create>>
+":AntView" -> ":AntView" : paint(g)
+activate ":AntView"
+":AntView" -> ":GuiManager" : getPosition()
+create "vector:Vector"
+":GuiManager" -> "vector:Vector" : <<create>>
+":GuiManager" --> ":AntView" : vector
+deactivate ":AntView"
+":AntView" -> ":AntView" : getAssetPath()
+activate ":AntView"
+":AntView" --> ":AntView" : String
+deactivate ":AntView"
+":AntView" -> "g:Graphics" : drawImage(...)
+activate "g:Graphics"
+deactivate "g:Graphics"
+deactivate ":AntView"
+deactivate ":AntView"
+deactivate ":Ant"
+@enduml
+

@@ -1,5 +1,6 @@
 package com.unexpected.ant.model;
 
+import com.unexpected.ant.gui.View;
 import com.unexpected.ant.model.entity.Echidna;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.List;
  */
 public abstract class AbstractEntity implements Entity, Dynamic {
 	protected List<Cell> cells = new ArrayList<>();
+
+	protected View view;
 
 	@Override
 	public void acceptVisitor(EntityVisitor visitor) {
@@ -72,11 +75,13 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 	@Override
 	public void removeCell(Cell cell) {
 		cells.remove(cell);
+		updateView();
 	}
 
 	@Override
 	public void removeCells(List<Cell> cells) {
 		this.cells.removeAll(cells);
+		updateView();
 	}
 
 	/**
@@ -88,13 +93,21 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 		cells.clear();
 		cells.add(cell);
 		cell.addEntity(this);
+		updateView();
 	}
 
 	@Override
 	public void setCells(List<Cell> cells) {
 		this.cells = new ArrayList<>(cells);
-        for (Cell cell : cells) {
-            cell.addEntity(this);
-        }
-    }
+		for (Cell cell : cells) {
+			cell.addEntity(this);
+		}
+		updateView();
+	}
+
+	protected void updateView() {
+		if (view != null) {
+			view.update();
+		}
+	}
 }
