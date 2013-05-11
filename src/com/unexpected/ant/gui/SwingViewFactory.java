@@ -1,5 +1,6 @@
 package com.unexpected.ant.gui;
 
+import com.unexpected.ant.gui.view.AntHillView;
 import com.unexpected.ant.gui.view.AntView;
 import com.unexpected.ant.gui.view.CellView;
 import com.unexpected.ant.gui.view.EchidnaView;

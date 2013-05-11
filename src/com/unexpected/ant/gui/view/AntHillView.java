@@ -1,5 +1,7 @@
-package com.unexpected.ant.gui;
+package com.unexpected.ant.gui.view;
 
+import com.unexpected.ant.gui.AbstractEntitySwingView;
+import com.unexpected.ant.gui.GuiManager;
 import com.unexpected.ant.model.entity.AntHill;
 
 public class AntHillView extends AbstractEntitySwingView<AntHill> {
