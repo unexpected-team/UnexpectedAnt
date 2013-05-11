@@ -1,6 +1,10 @@
 package com.unexpected.ant.gui;
 
 import com.unexpected.ant.gui.view.*;
+import com.unexpected.ant.gui.view.AntHillView;
+import com.unexpected.ant.gui.view.AntView;
+import com.unexpected.ant.gui.view.CellView;
+import com.unexpected.ant.gui.view.EchidnaView;
 import com.unexpected.ant.model.Cell;
 import com.unexpected.ant.model.entity.*;
 
@@ -31,12 +35,12 @@ public class SwingViewFactory implements ViewFactory {
         return view;
     }
 
-    @Override
-    public View createView(Cell cell) {
-        CellView view = new CellView(cell, guiManager);
-        container.add(view);
-        return view;
-    }
+	@Override
+	public View createView(Cell cell) {
+		CellView view = new CellView(cell, guiManager);
+		container.add(view);
+		return view;
+	}
 
     @Override
     public View createView(AntHill antHill) {
