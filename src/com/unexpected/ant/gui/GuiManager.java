@@ -1,5 +1,6 @@
 package com.unexpected.ant.gui;
 
+import com.unexpected.ant.model.Cell;
 import com.unexpected.ant.model.Entity;
 import com.unexpected.ant.model.Vector;
 
@@ -14,6 +15,23 @@ public class GuiManager {
 	 * @return a vector containing the x and y coordinates for the position
 	 */
 	public Vector getPosition(Entity entity) {
+		try {
+			Cell cell = entity.getCells().get(0);
+			return cell.getPosition().add(new Vector(55, 45));
+//			int i = GameEngine.INSTANCE.getGameField().getCells().indexOf(cell);
+//			return new Vector(i * 150, 0);
+		} catch (Exception e) {
+			return new Vector(0, 0);
+		}
+	}
+
+	/**
+	 * Returns the physical position of a cell
+	 *
+	 * @param cell The cell
+	 * @return a vector containing the x and y coordinates for the position
+	 */
+	public Vector getPosition(Cell cell) {
 		throw new UnsupportedOperationException();
 	}
 }

@@ -1,37 +1,29 @@
 package com.unexpected.ant.gui;
 
-import com.unexpected.ant.model.Entity;
-import com.unexpected.ant.model.Vector;
-
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Base class for entity swing views
- *
- * @param <T> The entity class
- */
-public abstract class AbstractSwingView<T extends Entity> extends JComponent implements View {
-	protected T entity;
+public abstract class AbstractSwingView<T> extends JComponent implements View {
 	protected GuiManager guiManager;
+	protected T entity;
 
-	protected abstract String getAssetPath();
-
-	public AbstractSwingView(T entity, GuiManager guiManager) {
-		this.entity = entity;
+	public AbstractSwingView(GuiManager guiManager, T entity) {
 		this.guiManager = guiManager;
+		this.entity = entity;
+		setPreferredSize(new Dimension(400, 400));
 	}
 
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		Image image = new ImageIcon(getAssetPath()).getImage();
-		Vector position = guiManager.getPosition(entity);
-		g.drawImage(image, position.getX(), position.getY(), null);
+	public Rectangle getBounds() {
+		return new Rectangle(getX(), getY(), getWidth(), getHeight());
+	}
+
+	public int getZOrder() {
+		return 0;
 	}
 
 	@Override
 	public void update() {
-		revalidate();
+		repaint();
 	}
 }

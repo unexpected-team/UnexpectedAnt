@@ -28,6 +28,7 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 	@Override
 	public void addCell(Cell cell) {
 		cells.add(cell);
+		updateView();
 	}
 
 	@Override

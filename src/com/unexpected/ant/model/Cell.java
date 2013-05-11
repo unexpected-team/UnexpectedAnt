@@ -1,5 +1,8 @@
 package com.unexpected.ant.model;
 
+import com.unexpected.ant.GameEngine;
+import com.unexpected.ant.gui.View;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -9,7 +12,13 @@ import java.util.*;
 public class Cell implements Serializable {
 	private Set<Entity> entities = new HashSet<>();
 	private Map<Direction, Cell> neighbours = new HashMap<>();
-	private Vector position;
+	private Vector position = new Vector(0, 0);
+
+	private View view;
+
+	public Cell() {
+		view = GameEngine.INSTANCE.getViewFactory().createView(this);
+	}
 
 	/**
 	 * Adds an entity to the cell
@@ -18,6 +27,10 @@ public class Cell implements Serializable {
 	 */
 	public void addEntity(Entity entity) {
 		entities.add(entity);
+		if (!entity.getCells().contains(this)) {
+			entity.addCell(this);
+		}
+		view.update();
 	}
 
 	/**
@@ -112,6 +125,12 @@ public class Cell implements Serializable {
 	 */
 	public void setPosition(Vector position) {
 		this.position = new Vector(position);
+		view.update();
+	}
+
+	public void setPosition(int x, int y) {
+		this.position = new Vector(x, y);
+		view.update();
 	}
 
 	/**
@@ -128,33 +147,34 @@ public class Cell implements Serializable {
 		}
 	}
 
-    /**
-     * Get the direction of the given cell based the current cell (only if it is it's neighbour)
-     *
-     * @param cell
-     * @return the Direction
-     */
-    public Direction getNeighbourDirection(Cell cell) {
-        if(!this.getNeighbours().contains(cell)) {
-            return null;
-        }
-        return getKeyByValueInNeighbourMap(this.getNeighboursMap(), cell);
-    }
+	/**
+	 * Get the direction of the given cell based the current cell (only if it is it's neighbour)
+	 *
+	 * @param cell
+	 * @return the Direction
+	 */
+	public Direction getNeighbourDirection(Cell cell) {
+		if (!this.getNeighbours().contains(cell)) {
+			return null;
+		}
+		return getKeyByValueInNeighbourMap(this.getNeighboursMap(), cell);
+	}
 
-    /**
-     * Get the key in neighbours hash map based on the given value
-     * @param map
-     * @param value
-     * @param <T>
-     * @param <E>
-     * @return the direction of the cell
-     */
-    public static <T, E> T getKeyByValueInNeighbourMap(Map<T, E> map, E value) {
-        for(Map.Entry entry : map.entrySet()) {
-            if(value.equals(entry.getValue())) {
-                return (T)entry.getKey();
-            }
-        }
-        return null;
-    }
+	/**
+	 * Get the key in neighbours hash map based on the given value
+	 *
+	 * @param map
+	 * @param value
+	 * @param <T>
+	 * @param <E>
+	 * @return the direction of the cell
+	 */
+	public static <T, E> T getKeyByValueInNeighbourMap(Map<T, E> map, E value) {
+		for (Map.Entry entry : map.entrySet()) {
+			if (value.equals(entry.getValue())) {
+				return (T) entry.getKey();
+			}
+		}
+		return null;
+	}
 }

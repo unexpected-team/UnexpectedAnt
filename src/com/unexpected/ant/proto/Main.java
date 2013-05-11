@@ -1,6 +1,5 @@
-package com.unexpected.ant;
+package com.unexpected.ant.proto;
 
-import com.unexpected.ant.proto.*;
 import com.unexpected.ant.proto.command.ExitRequestedException;
 
 import java.io.BufferedReader;
