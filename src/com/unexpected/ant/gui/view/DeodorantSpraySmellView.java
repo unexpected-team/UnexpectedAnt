@@ -14,6 +14,6 @@ public class DeodorantSpraySmellView extends AbstractEntitySwingView<DeodorantSp
 
     @Override
     protected String getAssetPath() {
-        return "assets/deodorantspray.png";
+        return "assets/deodorantspraysmell.png";
     }
 }
