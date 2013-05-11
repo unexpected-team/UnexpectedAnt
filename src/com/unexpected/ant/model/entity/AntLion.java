@@ -1,5 +1,6 @@
 package com.unexpected.ant.model.entity;
 
+import com.unexpected.ant.GameEngine;
 import com.unexpected.ant.model.AbstractEntity;
 import com.unexpected.ant.model.EntityVisitorAdapter;
 
@@ -8,26 +9,31 @@ import com.unexpected.ant.model.EntityVisitorAdapter;
  * cell(s) the ant lion stands on.
  */
 public class AntLion extends AbstractEntity {
-	@Override
-	public void action(long tickCount) {
-		super.action(tickCount);
-		kill();
-	}
 
-	/**
-	 * Kills the ants on the same cells
-	 */
-	public void kill() {
-		getVisitedByEntitiesOnSameCells(new EatVisitor());
-	}
+    public AntLion() {
+        view = GameEngine.INSTANCE.getViewFactory().createView(this);
+    }
 
-	/**
-	 * Used for eating ants
-	 */
-	protected class EatVisitor extends EntityVisitorAdapter {
-		@Override
-		public void visit(Ant ant) {
-			ant.remove();
-		}
-	}
+    @Override
+    public void action(long tickCount) {
+        super.action(tickCount);
+        kill();
+    }
+
+    /**
+     * Kills the ants on the same cells
+     */
+    public void kill() {
+        getVisitedByEntitiesOnSameCells(new EatVisitor());
+    }
+
+    /**
+     * Used for eating ants
+     */
+    protected class EatVisitor extends EntityVisitorAdapter {
+        @Override
+        public void visit(Ant ant) {
+            ant.remove();
+        }
+    }
 }

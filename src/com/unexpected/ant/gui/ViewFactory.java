@@ -1,19 +1,29 @@
 package com.unexpected.ant.gui;
 
 import com.unexpected.ant.model.Cell;
-import com.unexpected.ant.model.entity.Ant;
-import com.unexpected.ant.model.entity.AntHill;
-import com.unexpected.ant.model.entity.Echidna;
+import com.unexpected.ant.model.entity.*;
 
 /**
  * Interface for all view factories
  */
 public interface ViewFactory {
-	View createView(Ant ant);
+    View createView(Ant ant);
 
-	View createView(Echidna echidna);
+    View createView(Echidna echidna);
 
-	View createView(Cell cell);
+    View createView(Cell cell);
 
-	View createView(AntHill antHill);
+    View createView(AntHill antHill);
+
+    View createView(AntLion antLion);
+
+    View createView(DeodorantSpraySmell deodorantSpraySmell);
+
+    View createView(Food food);
+
+    View createView(KillerSpraySmell killerSpraySmell);
+
+    View createView(Obstacle obstacle);
+
+    View createView(Stone stone);
 }

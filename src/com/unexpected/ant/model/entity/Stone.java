@@ -1,5 +1,6 @@
 package com.unexpected.ant.model.entity;
 
+import com.unexpected.ant.GameEngine;
 import com.unexpected.ant.model.Direction;
 import com.unexpected.ant.model.EntityVisitor;
 import com.unexpected.ant.model.EntityVisitorAdapter;
@@ -14,6 +15,7 @@ public class Stone extends Obstacle {
      */
     public Stone() {
         super(ObstacleType.STONE);
+        view = GameEngine.INSTANCE.getViewFactory().createView(this);
     }
 
     @Override
