@@ -20,14 +20,14 @@ public class Ant extends MovingEntity {
 	public Ant(Direction facingDirection) {
 		super(facingDirection);
 		view = GameEngine.INSTANCE.getViewFactory().createView(this);
+		GameEngine.INSTANCE.getTimer().add(this);
 	}
 
 	/**
 	 * Default constructor with North facing direction
 	 */
 	public Ant() {
-		super();
-		view = GameEngine.INSTANCE.getViewFactory().createView(this);
+		this(Direction.NORTH);
 	}
 
 	@Override

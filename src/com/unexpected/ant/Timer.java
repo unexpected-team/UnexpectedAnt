@@ -3,6 +3,7 @@ package com.unexpected.ant;
 import com.unexpected.ant.model.Dynamic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ public class Timer implements Serializable {
 	 */
 	public void schedule() {
 		tick++;
-		for (Dynamic item : dynamicItems) {
+		for (Dynamic item : new ArrayList<>(dynamicItems)) {
 			item.action(tick);
 		}
 	}

@@ -7,6 +7,7 @@ import com.unexpected.ant.model.Direction;
 public class AntHill extends AbstractEntity {
 	public AntHill() {
 		view = GameEngine.INSTANCE.getViewFactory().createView(this);
+		GameEngine.INSTANCE.getTimer().add(this);
 	}
 
 	@Override

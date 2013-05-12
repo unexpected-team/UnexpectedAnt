@@ -60,7 +60,6 @@ public abstract class MovingEntity extends AbstractEntity {
 	 * The entity moves
 	 */
 	public void move() {
-		remove();
 		Cell nextCell = decideNextCell();
 		moveTo(nextCell);
 	}
@@ -108,10 +107,15 @@ public abstract class MovingEntity extends AbstractEntity {
 	 * @param cell The moves to this cell
 	 */
 	public void moveTo(Cell cell) {
-		this.remove();
+		for (Cell cell1 : getCells()) {
+			cell1.removeEntity(this);
+		}
+
 		cell.addEntity(this);
+		setFacingDirection(getCell().getNeighbourDirection(cell));
 		this.cells.clear();
 		this.cells.add(cell);
+		updateView();
 	}
 
 }

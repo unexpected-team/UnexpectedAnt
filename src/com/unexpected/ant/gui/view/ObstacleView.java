@@ -8,12 +8,18 @@ import com.unexpected.ant.model.entity.Obstacle;
  * Author: Balu
  */
 public class ObstacleView extends AbstractEntitySwingView<Obstacle> {
-    public ObstacleView(Obstacle entity, GuiManager guiManager) {
-        super(entity, guiManager);
-    }
+	public ObstacleView(Obstacle entity, GuiManager guiManager) {
+		super(entity, guiManager);
+	}
 
-    @Override
-    protected String getAssetPath() {
-        return "assets/puddle.png";
-    }
+	@Override
+	protected String getAssetPath() {
+		switch (entity.getObstacleType()) {
+			case STONE:
+				return "assets/stone.png";
+			case PUDDLE:
+				return "assets/puddle.png";
+		}
+		throw new InternalError();
+	}
 }

@@ -8,6 +8,8 @@ import java.awt.*;
  */
 public class GameFrame extends JFrame {
 	public GamePanel gamePanel = new GamePanel();
+	private JLabel background;
+
 
 	public GameFrame() throws HeadlessException {
 		init();
@@ -15,8 +17,13 @@ public class GameFrame extends JFrame {
 
 	private void init() {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(600, 600);
+		setLayout(null);
+		background = new JLabel(new ImageIcon("assets/bg.png"));
+		background.setBounds(0, 0, 2000, 2000);
+		setExtendedState(MAXIMIZED_BOTH);
+		gamePanel.setBounds(100, 100, 2000, 2000);
 		add(gamePanel);
+		add(background);
 	}
 
 	public GamePanel getGamePanel() {

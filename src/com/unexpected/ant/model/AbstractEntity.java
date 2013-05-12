@@ -71,6 +71,8 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 		for (Cell cell : getCells()) {
 			cell.removeEntity(this);
 		}
+		cells.clear();
+		updateView();
 	}
 
 	@Override

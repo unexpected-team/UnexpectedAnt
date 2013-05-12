@@ -35,6 +35,9 @@ public abstract class AbstractEntitySwingView<T extends Entity> extends Abstract
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		if (entity.getCells().isEmpty()) {
+			return;
+		}
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
