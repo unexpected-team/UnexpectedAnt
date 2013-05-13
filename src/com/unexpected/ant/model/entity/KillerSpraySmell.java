@@ -8,32 +8,33 @@ import com.unexpected.ant.model.EntityVisitorAdapter;
  */
 public class KillerSpraySmell extends Smell {
 
-    public KillerSpraySmell() {
-        setIntensity(5);
-        view = GameEngine.INSTANCE.getViewFactory().createView(this);
-    }
+	public KillerSpraySmell() {
+		setIntensity(5);
+		GameEngine.INSTANCE.getTimer().add(this);
+		view = GameEngine.INSTANCE.getViewFactory().createView(this);
+	}
 
-    @Override
-    public void action(long tickCount) {
-        kill();
-        if (tickCount % 12 == 0)
-            decay();
-    }
+	@Override
+	public void action(long tickCount) {
+		kill();
+		if (tickCount % 12 == 0)
+			decay();
+	}
 
-    /**
-     * Kills the ants on the same cells
-     */
-    public void kill() {
-        getVisitedByEntitiesOnSameCells(new KillVisitor());
-    }
+	/**
+	 * Kills the ants on the same cells
+	 */
+	public void kill() {
+		getVisitedByEntitiesOnSameCells(new KillVisitor());
+	}
 
-    /**
-     * Used for the visitor pattern for killing ants
-     */
-    protected class KillVisitor extends EntityVisitorAdapter {
-        @Override
-        public void visit(Ant ant) {
-            ant.remove();
-        }
-    }
+	/**
+	 * Used for the visitor pattern for killing ants
+	 */
+	protected class KillVisitor extends EntityVisitorAdapter {
+		@Override
+		public void visit(Ant ant) {
+			ant.remove();
+		}
+	}
 }

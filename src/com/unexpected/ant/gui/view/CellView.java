@@ -1,5 +1,6 @@
 package com.unexpected.ant.gui.view;
 
+import com.unexpected.ant.GameEngine;
 import com.unexpected.ant.gui.AbstractSwingView;
 import com.unexpected.ant.gui.GuiManager;
 import com.unexpected.ant.model.Cell;
@@ -11,6 +12,7 @@ import java.awt.*;
 public class CellView extends AbstractSwingView<Cell> {
 	public CellView(Cell entity, GuiManager guiManager) {
 		super(guiManager, entity);
+		addMouseListener(GameEngine.INSTANCE.getSprayListener());
 	}
 
 	protected String getAssetPath() {
@@ -45,5 +47,6 @@ public class CellView extends AbstractSwingView<Cell> {
 	public int getHeight() {
 		return 134;
 	}
+
 }
 

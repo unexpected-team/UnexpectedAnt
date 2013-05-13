@@ -7,12 +7,11 @@ import com.unexpected.ant.model.Direction;
 public class AntHill extends AbstractEntity {
 	public AntHill() {
 		view = GameEngine.INSTANCE.getViewFactory().createView(this);
-		GameEngine.INSTANCE.getTimer().add(this);
 	}
 
 	@Override
 	public void action(long tickCount) {
-		if (tickCount % 50 == 0)
+		if (tickCount % 50 == 3)
 			spawn();
 	}
 

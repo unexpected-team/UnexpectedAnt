@@ -20,7 +20,6 @@ public class Ant extends MovingEntity {
 	public Ant(Direction facingDirection) {
 		super(facingDirection);
 		view = GameEngine.INSTANCE.getViewFactory().createView(this);
-		GameEngine.INSTANCE.getTimer().add(this);
 	}
 
 	/**
@@ -37,10 +36,12 @@ public class Ant extends MovingEntity {
 
 	@Override
 	public void action(long tickCount) {
-		eat();
-		if (tickCount % 10 == 0) {
-			move();
-			createSmell();
+		if (!isRemoved()) {
+			eat();
+			if (tickCount % 10 == 0) {
+				move();
+				createSmell();
+			}
 		}
 	}
 

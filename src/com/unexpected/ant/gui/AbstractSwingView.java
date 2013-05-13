@@ -26,4 +26,8 @@ public abstract class AbstractSwingView<T> extends JComponent implements View {
 	public void update() {
 		repaint();
 	}
+
+	public T getEntity() {
+		return entity;
+	}
 }

@@ -1,5 +1,6 @@
 package com.unexpected.ant.model;
 
+import com.unexpected.ant.GameEngine;
 import com.unexpected.ant.gui.View;
 import com.unexpected.ant.model.entity.Echidna;
 
@@ -14,6 +15,10 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 	protected List<Cell> cells = new ArrayList<>();
 
 	protected View view;
+
+	public AbstractEntity() {
+		GameEngine.INSTANCE.getTimer().add(this);
+	}
 
 	@Override
 	public void acceptVisitor(EntityVisitor visitor) {
@@ -47,6 +52,8 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 	 * @return The first cell
 	 */
 	public Cell getCell() {
+		if (getCells().size() == 0)
+			return null;
 		return getCells().get(0);
 	}
 
@@ -112,5 +119,9 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 		if (view != null) {
 			view.update();
 		}
+	}
+
+	public boolean isRemoved() {
+		return getCell() == null;
 	}
 }

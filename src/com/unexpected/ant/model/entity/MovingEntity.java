@@ -60,8 +60,12 @@ public abstract class MovingEntity extends AbstractEntity {
 	 * The entity moves
 	 */
 	public void move() {
-		Cell nextCell = decideNextCell();
-		moveTo(nextCell);
+		synchronized (this) {
+			if (!isRemoved()) {
+				Cell nextCell = decideNextCell();
+				moveTo(nextCell);
+			}
+		}
 	}
 
 	/**

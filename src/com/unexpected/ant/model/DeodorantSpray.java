@@ -1,0 +1,15 @@
+package com.unexpected.ant.model;
+
+import com.unexpected.ant.model.entity.DeodorantSpraySmell;
+import com.unexpected.ant.model.entity.Smell;
+
+public class DeodorantSpray extends Spray {
+	public DeodorantSpray(int quantity) {
+		super(quantity);
+	}
+
+	@Override
+	public Smell createSpraySmell() {
+		return new DeodorantSpraySmell();
+	}
+}

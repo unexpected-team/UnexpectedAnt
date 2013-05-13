@@ -90,14 +90,6 @@ public class Echidna extends MovingEntity {
 	}
 
 	/**
-	 * Command the echidna to move
-	 */
-	public void move() {
-		Cell nextCell = decideNextCell();
-		moveTo(nextCell);
-	}
-
-	/**
 	 * Decides about the next cell to move on to
 	 *
 	 * @return The next cell
@@ -125,18 +117,6 @@ public class Echidna extends MovingEntity {
 	 */
 	public void sleep(int amount) {
 		sleepCounter = amount;
-	}
-
-	/**
-	 * The echidna moves to the given cell
-	 *
-	 * @param cell The cell to move to
-	 */
-	public void moveTo(Cell cell) {
-		this.remove();
-		cell.addEntity(this);
-		this.cells.clear();
-		this.cells.add(cell);
 	}
 
 	/**

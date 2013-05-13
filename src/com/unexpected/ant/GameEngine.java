@@ -4,18 +4,76 @@ package com.unexpected.ant;
 import com.unexpected.ant.gui.GameFrame;
 import com.unexpected.ant.gui.SwingViewFactory;
 import com.unexpected.ant.gui.ViewFactory;
-import com.unexpected.ant.model.Cell;
-import com.unexpected.ant.model.Direction;
-import com.unexpected.ant.model.GameField;
+import com.unexpected.ant.gui.view.SprayListener;
+import com.unexpected.ant.model.*;
 
 public enum GameEngine {
 	INSTANCE;
+	private Spray deodorantSpray = new DeodorantSpray(10);
 	private GameField gameField = new GameField();
 	private GameFrame gameFrame = new GameFrame();
+	private Spray killerSpray = new KillerSpray(10);
+	private SprayListener sprayListener = new SprayListener();
 	private Timer timer = new Timer();
 	private ViewFactory viewFactory = new SwingViewFactory(gameFrame.getGamePanel());
 
 	private GameEngine() {
+	}
+
+	public Spray getDeodorantSpray() {
+		return deodorantSpray;
+	}
+
+	public void setDeodorantSpray(Spray deodorantSpray) {
+		this.deodorantSpray = deodorantSpray;
+	}
+
+	public GameField getGameField() {
+		return gameField;
+	}
+
+	public void setGameField(GameField gameField) {
+		this.gameField = gameField;
+	}
+
+	public GameFrame getGameFrame() {
+		return gameFrame;
+	}
+
+	public void setGameFrame(GameFrame gameFrame) {
+		this.gameFrame = gameFrame;
+	}
+
+	public Spray getKillerSpray() {
+		return killerSpray;
+	}
+
+	public void setKillerSpray(Spray killerSpray) {
+		this.killerSpray = killerSpray;
+	}
+
+	public SprayListener getSprayListener() {
+		return sprayListener;
+	}
+
+	public void setSprayListener(SprayListener sprayListener) {
+		this.sprayListener = sprayListener;
+	}
+
+	public Timer getTimer() {
+		return timer;
+	}
+
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
+
+	public ViewFactory getViewFactory() {
+		return viewFactory;
+	}
+
+	public void setViewFactory(ViewFactory viewFactory) {
+		this.viewFactory = viewFactory;
 	}
 
 	public void reset() {
@@ -68,37 +126,5 @@ public enum GameEngine {
 		c[13].addNeighbour(Direction.SOUTH, c[14]);
 		c[14].addNeighbour(Direction.SOUTH, c[15]);
 		c[15].addNeighbour(Direction.SOUTH, c[16]);
-	}
-
-	public GameField getGameField() {
-		return gameField;
-	}
-
-	public void setGameField(GameField gameField) {
-		this.gameField = gameField;
-	}
-
-	public GameFrame getGameFrame() {
-		return gameFrame;
-	}
-
-	public void setGameFrame(GameFrame gameFrame) {
-		this.gameFrame = gameFrame;
-	}
-
-	public Timer getTimer() {
-		return timer;
-	}
-
-	public void setTimer(Timer timer) {
-		this.timer = timer;
-	}
-
-	public ViewFactory getViewFactory() {
-		return viewFactory;
-	}
-
-	public void setViewFactory(ViewFactory viewFactory) {
-		this.viewFactory = viewFactory;
 	}
 }
