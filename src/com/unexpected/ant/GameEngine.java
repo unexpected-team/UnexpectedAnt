@@ -8,6 +8,8 @@ import com.unexpected.ant.model.Cell;
 import com.unexpected.ant.model.Direction;
 import com.unexpected.ant.model.GameField;
 
+import java.security.InvalidParameterException;
+
 public enum GameEngine {
 	INSTANCE;
 	private GameField gameField = new GameField();
@@ -19,55 +21,46 @@ public enum GameEngine {
 	}
 
 	public void reset() {
-		initGameField();
+		initGameField(10, 10);
 	}
 
-	private void initGameField() {
-		Cell[] c = new Cell[33];
-		for (int i = 1; i < 33; i++) {
+	private void initGameField(int x, int y) {
+        int fieldSizeX = 110;
+        int fieldSizeY = 130;
+
+        /*
+        * if map is X = 6 and Y = 8, it looks like this (the numbers are the cell ids'):
+        *
+        *   0       8       16
+        *       4       12      20
+        *   1       9       17
+        *       5       13      21
+        *   2       10      18
+        *       6       14      22
+        *   3       11      19
+        *       7       15      23
+        */
+
+        int fieldsNum = x*y/2;
+
+		Cell[] c = new Cell[fieldsNum];
+		for (int i = 0; i < fieldsNum; i++) {
 			c[i] = new Cell();
 			gameField.getCells().add(c[i]);
-			c[i].setPosition((i - 1) / 4 * 110,
-			                 ((i - 1) % 4) * 130 + ((i - 1) / 4 % 2 == 1 ? 65 : 0));
+			c[i].setPosition(
+                    ((i - (i % y)) / y) * fieldSizeX + ((i % y) >= (y / 2) ? (fieldSizeX / 2) : 0)
+                    ,
+                    ((i % y) % (y / 2)) * fieldSizeY + ((i % y) >= (y / 2) ? (fieldSizeY / 2) : 0)
+            );
 		}
 		gameFrame.repaint();
-		c[1].addNeighbour(Direction.SOUTHEAST, c[5]);
-		c[2].addNeighbour(Direction.SOUTHEAST, c[6]);
-		c[3].addNeighbour(Direction.SOUTHEAST, c[7]);
-		c[4].addNeighbour(Direction.SOUTHEAST, c[8]);
-		c[2].addNeighbour(Direction.NORTHEAST, c[5]);
-		c[3].addNeighbour(Direction.NORTHEAST, c[6]);
-		c[4].addNeighbour(Direction.NORTHEAST, c[7]);
 
-		c[9].addNeighbour(Direction.SOUTHEAST, c[13]);
-		c[10].addNeighbour(Direction.SOUTHEAST, c[14]);
-		c[11].addNeighbour(Direction.SOUTHEAST, c[15]);
-		c[12].addNeighbour(Direction.SOUTHEAST, c[16]);
-		c[10].addNeighbour(Direction.NORTHEAST, c[13]);
-		c[11].addNeighbour(Direction.NORTHEAST, c[14]);
-		c[12].addNeighbour(Direction.NORTHEAST, c[15]);
-
-		c[5].addNeighbour(Direction.SOUTHEAST, c[10]);
-		c[6].addNeighbour(Direction.SOUTHEAST, c[11]);
-		c[7].addNeighbour(Direction.SOUTHEAST, c[12]);
-
-		c[5].addNeighbour(Direction.NORTHEAST, c[9]);
-		c[6].addNeighbour(Direction.NORTHEAST, c[10]);
-		c[7].addNeighbour(Direction.NORTHEAST, c[11]);
-		c[8].addNeighbour(Direction.NORTHEAST, c[12]);
-
-		c[1].addNeighbour(Direction.SOUTH, c[2]);
-		c[2].addNeighbour(Direction.SOUTH, c[3]);
-		c[3].addNeighbour(Direction.SOUTH, c[4]);
-		c[5].addNeighbour(Direction.SOUTH, c[6]);
-		c[6].addNeighbour(Direction.SOUTH, c[7]);
-		c[7].addNeighbour(Direction.SOUTH, c[8]);
-		c[9].addNeighbour(Direction.SOUTH, c[10]);
-		c[10].addNeighbour(Direction.SOUTH, c[11]);
-		c[11].addNeighbour(Direction.SOUTH, c[12]);
-		c[13].addNeighbour(Direction.SOUTH, c[14]);
-		c[14].addNeighbour(Direction.SOUTH, c[15]);
-		c[15].addNeighbour(Direction.SOUTH, c[16]);
+        for(int i = 0; i < x*y; i++) {
+            int base = i + (x*y/2); // Because the fucking JAVA can't use modulo if the number is negative
+            c[i].addNeighbour(Direction.NORTH, c[(base - 1) % fieldsNum]);
+            c[i].addNeighbour(Direction.NORTHEAST, c[(base + y/2 - ((i % y) < (y/2) ? 1 : 0) % fieldsNum)]);
+            c[i].addNeighbour(Direction.SOUTHEAST, c[(base + y/2 + ((i % y) >= (y/2) ? 1 : 0) % fieldsNum)]);
+        }
 	}
 
 	public GameField getGameField() {
