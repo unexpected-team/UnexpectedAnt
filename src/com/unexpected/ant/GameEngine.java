@@ -118,7 +118,7 @@ public enum GameEngine {
 
         for(int i = 0; i < fieldsNum; i++) {
             int base = i + fieldsNum; // Because the fucking JAVA can't use modulo if the number is negative
-            c[i].addNeighbour(Direction.NORTH, c[(base - 1  + (i % y == 0 ? y/2 : 0)) % fieldsNum]);
+            c[i].addNeighbour(Direction.NORTH, c[(base - 1  + (i % (y/2) == 0 ? (y/2) : 0)) % fieldsNum]);
             c[i].addNeighbour(Direction.NORTHEAST, c[(base + y/2 - ((i % y) < (y/2) ? 1 : 0) + (i % y == 0 ? y/2 : 0)) % fieldsNum]);
             c[i].addNeighbour(Direction.NORTHWEST, c[(base - y/2 - ((i % y) < (y/2) ? 1 : 0) + (i % y == 0 ? y/2 : 0)) % fieldsNum]);
         }
