@@ -21,6 +21,6 @@ public class EchidnaView extends AbstractEntitySwingView<Echidna> {
 
 	@Override
 	public double getRotation() {
-		return (Math.PI * 2 * entity.getFacingDirection().value()) / 6 - Math.PI / 2;
+		return (Math.PI * 2 * entity.getFacingDirection().value()) / 6 + Math.PI / 2 + Math.PI / 6;
 	}
 }

@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public abstract class MovingEntity extends AbstractEntity {
 	protected Direction facingDirection;
+	private final Object lockObj = new Object();
 
 	public MovingEntity(Direction facingDirection) {
 		this.facingDirection = facingDirection;
@@ -22,6 +23,13 @@ public abstract class MovingEntity extends AbstractEntity {
 	 */
 	public MovingEntity() {
 		this(Direction.NORTH);
+	}
+
+	@Override
+	public void moveTo(Cell cell) {
+		Cell original = getCell();
+		super.moveTo(cell);
+		setFacingDirection(original.getNeighbourDirection(cell));
 	}
 
 	/**
@@ -60,7 +68,7 @@ public abstract class MovingEntity extends AbstractEntity {
 	 * The entity moves
 	 */
 	public void move() {
-		synchronized (this) {
+		synchronized (lockObj) {
 			if (!isRemoved()) {
 				Cell nextCell = decideNextCell();
 				moveTo(nextCell);
@@ -104,22 +112,5 @@ public abstract class MovingEntity extends AbstractEntity {
 	}
 
 	public abstract double rateCell(Cell cell, Direction direction);
-
-	/**
-	 * The ant moves to the given cell
-	 *
-	 * @param cell The moves to this cell
-	 */
-	public void moveTo(Cell cell) {
-		for (Cell cell1 : getCells()) {
-			cell1.removeEntity(this);
-		}
-
-		cell.addEntity(this);
-		setFacingDirection(getCell().getNeighbourDirection(cell));
-		this.cells.clear();
-		this.cells.add(cell);
-		updateView();
-	}
 
 }

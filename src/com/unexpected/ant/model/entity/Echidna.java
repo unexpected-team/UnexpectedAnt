@@ -6,8 +6,6 @@ import com.unexpected.ant.model.Direction;
 import com.unexpected.ant.model.EntityVisitor;
 import com.unexpected.ant.model.EntityVisitorAdapter;
 
-import java.util.Map;
-
 /**
  * This class represents the echidna which moves on the game field and eats ants.
  */
@@ -89,25 +87,12 @@ public class Echidna extends MovingEntity {
 		return sleepCounter > 0;
 	}
 
-	/**
-	 * Decides about the next cell to move on to
-	 *
-	 * @return The next cell
-	 */
-	public Cell decideNextCell() {
-		for (Map.Entry<Direction, Cell> neighbour : getCell().getNeighboursMap().entrySet()) {
-			Direction direction = neighbour.getKey();
-			Cell cell = neighbour.getValue();
-//          MoveVisitor visitor = new MoveVisitor();
-			cell.getNeighbour(direction);
-		}
-
-		return getCell().getNeighbours().get(0);
-	}
-
-	@Override
 	public double rateCell(Cell cell, Direction direction) {
-		return 1;
+		int directionValue = direction.getRelativeDirectionTo(getFacingDirection()).value();
+		double weight = Math.abs(directionValue - Direction.values().length / 2) / 3.0;
+		SmellVisitor smellVisitor = new SmellVisitor();
+		cell.visitEntities(smellVisitor);
+		return weight * (1 + smellVisitor.getSmell());
 	}
 
 	/**

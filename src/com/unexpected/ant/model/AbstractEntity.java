@@ -124,4 +124,20 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 	public boolean isRemoved() {
 		return getCell() == null;
 	}
+
+	/**
+	 * Move to the given cell
+	 *
+	 * @param cell The moves to this cell
+	 */
+	public void moveTo(Cell cell) {
+		for (Cell cell1 : getCells()) {
+			cell1.removeEntity(this);
+		}
+
+		cell.addEntity(this);
+		this.cells.clear();
+		this.cells.add(cell);
+		updateView();
+	}
 }

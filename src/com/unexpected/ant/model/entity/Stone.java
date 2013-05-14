@@ -1,5 +1,6 @@
 package com.unexpected.ant.model.entity;
 
+import com.unexpected.ant.model.Cell;
 import com.unexpected.ant.model.Direction;
 import com.unexpected.ant.model.EntityVisitor;
 import com.unexpected.ant.model.EntityVisitorAdapter;
@@ -35,9 +36,13 @@ public class Stone extends Obstacle {
 	public boolean kick(Direction direction) {
 
 		StoneVisitor stoneVisitor = new StoneVisitor();
-		getCell().getNeighbour(direction.getOpposite()).visitEntities(stoneVisitor);
-//        if(stoneVisitor)
-		return true;
+		Cell neighbour = getCell().getNeighbour(direction.getOpposite());
+		neighbour.visitEntities(stoneVisitor);
+		if (!stoneVisitor.hasStone) {
+			this.moveTo(neighbour);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
