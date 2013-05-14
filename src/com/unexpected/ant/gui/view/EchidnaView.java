@@ -12,6 +12,10 @@ public class EchidnaView extends AbstractEntitySwingView<Echidna> {
 		super(entity, guiManager);
 	}
 
+    /**
+     * echidna picture
+     * @return image
+     */
 	@Override
 	protected String getAssetPath() {
 		if (entity.isAsleep())
@@ -19,6 +23,10 @@ public class EchidnaView extends AbstractEntitySwingView<Echidna> {
 		return "assets/echidna.png";
 	}
 
+    /**
+     * echidna image rotation
+     * @return degree
+     */
 	@Override
 	public double getRotation() {
 		return (Math.PI * 2 * entity.getFacingDirection().value()) / 6 - Math.PI / 2;
