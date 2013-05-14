@@ -26,6 +26,10 @@ public class Main {
 		GameEngine.INSTANCE.getGameField().getCells().get(list.get(2)).addEntity(new Obstacle(ObstacleType.PUDDLE));
 		GameEngine.INSTANCE.getGameField().getCells().get(list.get(3)).addEntity(new Echidna());
 		GameEngine.INSTANCE.getGameField().getCells().get(list.get(4)).addEntity(new Food());
+        GameEngine.INSTANCE.getGameField().getCells().get(list.get(5)).addEntity(new Stone());
+        GameEngine.INSTANCE.getGameField().getCells().get(list.get(6)).addEntity(new Stone());
+        GameEngine.INSTANCE.getGameField().getCells().get(list.get(7)).addEntity(new AntLion());
+        GameEngine.INSTANCE.getGameField().getCells().get(list.get(8)).addEntity(new AntLion());
 		GameEngine.INSTANCE.getGameFrame().setVisible(true);
 		GameEngine.INSTANCE.getGameFrame().repaint();
 		GameEngine.INSTANCE.getTimer().start();

@@ -127,7 +127,7 @@ public class Echidna extends MovingEntity {
 			hunger--;
 			ant.remove();
 			if (!isHungry()) {
-				sleepCounter = 40;
+				sleep(40);
 			}
 		}
 	}
