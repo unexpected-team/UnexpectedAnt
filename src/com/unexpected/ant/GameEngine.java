@@ -1,13 +1,12 @@
 package com.unexpected.ant;
 
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import com.unexpected.ant.gui.GameFrame;
 import com.unexpected.ant.gui.SwingViewFactory;
 import com.unexpected.ant.gui.ViewFactory;
 import com.unexpected.ant.gui.view.SprayListener;
 import com.unexpected.ant.model.*;
-
-import java.security.InvalidParameterException;
 
 public enum GameEngine {
 	INSTANCE;
@@ -86,6 +85,10 @@ public enum GameEngine {
         int fieldSizeX = 110;
         int fieldSizeY = 130;
 
+        if(x % 2 != 0 || y % 2 != 0) {
+            throw new IllegalArgumentException("A pálya szélessége és magassága páros kell legyen!");
+        }
+
         /*
         * if map is X = 6 and Y = 8, it looks like this (the numbers are the cell ids'):
         *
@@ -113,11 +116,11 @@ public enum GameEngine {
 		}
 		gameFrame.repaint();
 
-        for(int i = 0; i < x*y; i++) {
-            int base = i + (x*y/2); // Because the fucking JAVA can't use modulo if the number is negative
-            c[i].addNeighbour(Direction.NORTH, c[(base - 1) % fieldsNum]);
-            c[i].addNeighbour(Direction.NORTHEAST, c[(base + y/2 - ((i % y) < (y/2) ? 1 : 0) % fieldsNum)]);
-            c[i].addNeighbour(Direction.SOUTHEAST, c[(base + y/2 + ((i % y) >= (y/2) ? 1 : 0) % fieldsNum)]);
+        for(int i = 0; i < fieldsNum; i++) {
+            int base = i + fieldsNum; // Because the fucking JAVA can't use modulo if the number is negative
+            c[i].addNeighbour(Direction.NORTH, c[(base - 1  + (i % y == 0 ? y/2 : 0)) % fieldsNum]);
+            c[i].addNeighbour(Direction.NORTHEAST, c[(base + y/2 - ((i % y) < (y/2) ? 1 : 0) + (i % y == 0 ? y/2 : 0)) % fieldsNum]);
+            c[i].addNeighbour(Direction.NORTHWEST, c[(base - y/2 - ((i % y) < (y/2) ? 1 : 0) + (i % y == 0 ? y/2 : 0)) % fieldsNum]);
         }
 	}
 }
