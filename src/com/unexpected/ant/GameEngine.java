@@ -109,7 +109,7 @@ public enum GameEngine {
 			c[i] = new Cell();
 			gameField.getCells().add(c[i]);
 			c[i].setPosition(
-                    ((i - (i % y)) / y) * fieldSizeX + ((i % y) >= (y / 2) ? (fieldSizeX / 2) : 0)
+                    ((i - (i % y)) / y) * fieldSizeX * 2 + ((i % y) >= (y / 2) ? (fieldSizeX * 2 / 2) : 0)
                     ,
                     ((i % y) % (y / 2)) * fieldSizeY + ((i % y) >= (y / 2) ? (fieldSizeY / 2) : 0)
             );
