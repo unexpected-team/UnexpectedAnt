@@ -32,6 +32,10 @@ public abstract class AbstractEntitySwingView<T extends Entity> extends Abstract
 		return guiManager.getPosition(entity);
 	}
 
+    /**
+     * Graphics draw
+     * @param g
+     */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -15,6 +15,10 @@ public class CellView extends AbstractSwingView<Cell> {
 		addMouseListener(GameEngine.INSTANCE.getSprayListener());
 	}
 
+    /**
+     * ant picture
+     * @return image
+     */
 	protected String getAssetPath() {
 		return "/assets/tile.png";
 	}

@@ -19,6 +19,9 @@ public class GameFrame extends JFrame {
 		init();
 	}
 
+    /**
+     * Initialize window
+     */
 	private void init() {
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -36,6 +39,9 @@ public class GameFrame extends JFrame {
 		add(background);
 	}
 
+    /**
+     * Initialize menu
+     */
 	private void initMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Menü");
