@@ -1,6 +1,8 @@
 package com.unexpected.ant.gui;
 
 import com.unexpected.ant.model.Cell;
+import com.unexpected.ant.model.DeodorantSpray;
+import com.unexpected.ant.model.KillerSpray;
 import com.unexpected.ant.model.entity.*;
 
 /**
@@ -26,4 +28,8 @@ public interface ViewFactory {
     View createView(Obstacle obstacle);
 
     View createView(Stone stone);
+
+	View createView(KillerSpray killerSpray);
+
+	View createView(DeodorantSpray deodorantSpray);
 }

@@ -6,6 +6,8 @@ import com.unexpected.ant.gui.view.AntView;
 import com.unexpected.ant.gui.view.CellView;
 import com.unexpected.ant.gui.view.EchidnaView;
 import com.unexpected.ant.model.Cell;
+import com.unexpected.ant.model.DeodorantSpray;
+import com.unexpected.ant.model.KillerSpray;
 import com.unexpected.ant.model.entity.*;
 
 import java.awt.*;
@@ -90,4 +92,20 @@ public class SwingViewFactory implements ViewFactory {
         container.add(view);
         return view;
     }
+
+	@Override
+	public View createView(KillerSpray killerSpray) {
+		KillerSprayView view = new KillerSprayView(killerSpray, guiManager);
+		view.setBounds(300, 0, 200, 50);
+		container.add(view);
+		return view;
+	}
+
+	@Override
+	public View createView(DeodorantSpray deodorantSpray) {
+		DeodorantSprayView view = new DeodorantSprayView(deodorantSpray, guiManager);
+		view.setBounds(520, 0, 200, 50);
+		container.add(view);
+		return view;
+	}
 }

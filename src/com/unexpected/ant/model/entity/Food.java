@@ -22,4 +22,9 @@ public class Food extends AbstractEntity {
 	public void acceptVisitor(EntityVisitor visitor) {
 		visitor.visit(this);
 	}
+
+	@Override
+	public void remove() {
+		GameEngine.INSTANCE.gameOver();
+	}
 }

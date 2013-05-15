@@ -28,14 +28,22 @@ public class Timer implements Serializable {
 	 * Starts scheduling infinitely, until stop() is called. Stop should be called in a different thread.
 	 */
 	public void start() {
+		if (!stopped)
+			return;
 		stopped = false;
-		while (!stopped) {
-			schedule();
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException ignored) {
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (!stopped) {
+					schedule();
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException ignored) {
+					}
+				}
 			}
-		}
+		}).start();
 	}
 
 	/**
@@ -60,6 +68,11 @@ public class Timer implements Serializable {
 	}
 
 	public void clear() {
+		tick = 0;
 		dynamicItems.clear();
+	}
+
+	public void remove(Dynamic dynamic) {
+		dynamicItems.remove(dynamic);
 	}
 }

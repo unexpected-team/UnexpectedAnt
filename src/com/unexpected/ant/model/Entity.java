@@ -1,7 +1,5 @@
 package com.unexpected.ant.model;
 
-import com.unexpected.ant.model.entity.Echidna;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,8 +21,6 @@ public interface Entity extends Serializable {
 	 * @return True if this entity can be on the same cell with the entity given, otherwise false
 	 */
 	boolean canBeOnSameCellWith(Entity entity);
-
-	boolean canBeSteppedOnBy(Echidna entity);
 
 	/**
 	 * @return The list of cells which contain this entity

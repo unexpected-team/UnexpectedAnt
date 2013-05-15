@@ -16,4 +16,8 @@ public class GameField implements Serializable {
 	public void setCells(List<Cell> cells) {
 		this.cells = cells;
 	}
+
+	public void clear() {
+		getCells().clear();
+	}
 }

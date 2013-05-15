@@ -1,18 +1,18 @@
 package com.unexpected.ant.gui.view;
 
 import com.unexpected.ant.gui.GuiManager;
-import com.unexpected.ant.model.KillerSpray;
+import com.unexpected.ant.model.DeodorantSpray;
 
 public class DeodorantSprayView extends SprayView {
 
-	public DeodorantSprayView(KillerSpray entity, GuiManager guiManager) {
+	public DeodorantSprayView(DeodorantSpray entity, GuiManager guiManager) {
 		super(entity, guiManager);
-		init();
+		update();
 	}
 
 	@Override
 	protected String getAssetPath() {
-		return "assets/killerspray.png";
+		return "assets/deodorantspray.png";
 	}
 
 }

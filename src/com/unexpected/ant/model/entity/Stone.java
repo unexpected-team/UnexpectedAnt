@@ -1,9 +1,6 @@
 package com.unexpected.ant.model.entity;
 
-import com.unexpected.ant.model.Cell;
-import com.unexpected.ant.model.Direction;
-import com.unexpected.ant.model.EntityVisitor;
-import com.unexpected.ant.model.EntityVisitorAdapter;
+import com.unexpected.ant.model.*;
 
 /**
  * Stone, the echidna can kick this if the neighbouring cell does not contain another stone, the ants have to go
@@ -18,17 +15,12 @@ public class Stone extends Obstacle {
 	}
 
 	@Override
-	public boolean canBeSteppedOnBy(Echidna entity) {
-		return true;
-	}
-
-	@Override
 	public void setObstacleType(ObstacleType obstacleType) {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * Kick the stone from the given direction. Direction means where the kick came from
+	 * Kick the stone from the given direction. Direction means which direction the stone is kicked
 	 *
 	 * @param direction
 	 * @return
@@ -36,13 +28,18 @@ public class Stone extends Obstacle {
 	public boolean kick(Direction direction) {
 
 		StoneVisitor stoneVisitor = new StoneVisitor();
-		Cell neighbour = getCell().getNeighbour(direction.getOpposite());
+		Cell neighbour = getCell().getNeighbour(direction);
 		neighbour.visitEntities(stoneVisitor);
 		if (!stoneVisitor.hasStone) {
 			this.moveTo(neighbour);
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean canBeOnSameCellWith(Entity entity) {
+		return entity instanceof Echidna;
 	}
 
 	@Override

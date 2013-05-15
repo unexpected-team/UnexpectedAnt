@@ -1,5 +1,6 @@
 package com.unexpected.ant.model;
 
+import com.unexpected.ant.gui.View;
 import com.unexpected.ant.model.entity.Smell;
 
 import java.util.HashSet;
@@ -7,6 +8,8 @@ import java.util.Set;
 
 public abstract class Spray {
 	private int affectedRadius;
+
+	protected View view;
 
 	private int quantity;
 
@@ -31,7 +34,8 @@ public abstract class Spray {
 			infectable.addEntity(createSpraySmell());
 		}
 		quantity--;
+		view.update();
 	}
 
-	public abstract Smell createSpraySmell();
+	protected abstract Smell createSpraySmell();
 }

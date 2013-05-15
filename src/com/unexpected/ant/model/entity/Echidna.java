@@ -39,6 +39,16 @@ public class Echidna extends MovingEntity {
 		}
 	}
 
+	@Override
+	public boolean moveTo(Cell cell) {
+		KickVisitor kickVisitor = new KickVisitor(getCell().getNeighbourDirection(cell));
+		cell.visitEntities(kickVisitor);
+		if(!kickVisitor.success) {
+			return false;
+		}
+		return super.moveTo(cell);
+	}
+
 	/**
 	 * The echidna eats ants
 	 */
@@ -89,10 +99,17 @@ public class Echidna extends MovingEntity {
 
 	public double rateCell(Cell cell, Direction direction) {
 		int directionValue = direction.getRelativeDirectionTo(getFacingDirection()).value();
-		double weight = Math.abs(directionValue - Direction.values().length / 2) / 3.0;
+		int weight = Math.abs(directionValue - Direction.values().length / 2);
 		SmellVisitor smellVisitor = new SmellVisitor();
 		cell.visitEntities(smellVisitor);
-		return weight * (1 + smellVisitor.getSmell());
+		int historyPoint = 5;
+		for (Cell historyCell : history) {
+			if (historyCell.equals(cell)) {
+				historyPoint--;
+			}
+		}
+
+		return weight / 2 + smellVisitor.getSmell() * 5 + Math.random() * 2 + historyPoint / 2;
 	}
 
 	/**
@@ -122,6 +139,20 @@ public class Echidna extends MovingEntity {
 		@Override
 		public void visit(AntSmell antSmell) {
 			smell += antSmell.getIntensity() * 2;
+		}
+	}
+
+	protected class KickVisitor extends EntityVisitorAdapter {
+		private Direction direction;
+		public boolean success = true;
+
+		public KickVisitor(Direction direction) {
+			this.direction = direction;
+		}
+
+		@Override
+		public void visit(Stone stone) {
+			success = stone.kick(direction);
 		}
 	}
 }

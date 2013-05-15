@@ -17,7 +17,7 @@ public abstract class AbstractEntitySwingView<T extends Entity> extends Abstract
 	protected abstract String getAssetPath();
 
 	public AbstractEntitySwingView(T entity, GuiManager guiManager) {
-		super(guiManager, entity);
+		super(entity, guiManager);
 		this.entity = entity;
 		setSize(40, 40);
 		setBounds();
@@ -54,7 +54,7 @@ public abstract class AbstractEntitySwingView<T extends Entity> extends Abstract
 	}
 
 	protected Image getImage() {
-		return new ImageIcon(getAssetPath()).getImage();
+		return new ImageIcon(getClass().getClassLoader().getResource(getAssetPath())).getImage();
 	}
 
 	@Override

@@ -169,7 +169,7 @@ public class Cell implements Serializable {
 	 * @param <E>
 	 * @return the direction of the cell
 	 */
-	public static <T, E> T getKeyByValueInNeighbourMap(Map<T, E> map, E value) {
+	private <T, E> T getKeyByValueInNeighbourMap(Map<T, E> map, E value) {
 		for (Map.Entry entry : map.entrySet()) {
 			if (value.equals(entry.getValue())) {
 				return (T) entry.getKey();

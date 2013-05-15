@@ -7,15 +7,10 @@ public abstract class AbstractSwingView<T> extends JComponent implements View {
 	protected GuiManager guiManager;
 	protected T entity;
 
-	public AbstractSwingView(GuiManager guiManager, T entity) {
+	public AbstractSwingView(T entity, GuiManager guiManager) {
 		this.guiManager = guiManager;
 		this.entity = entity;
 		setPreferredSize(new Dimension(400, 400));
-	}
-
-	@Override
-	public Rectangle getBounds() {
-		return new Rectangle(getX(), getY(), getWidth(), getHeight());
 	}
 
 	public int getZOrder() {

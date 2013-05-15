@@ -57,10 +57,17 @@ public class Ant extends MovingEntity {
 
 	public double rateCell(Cell cell, Direction direction) {
 		int directionValue = direction.getRelativeDirectionTo(getFacingDirection()).value();
-		double weight = Math.abs(directionValue - Direction.values().length / 2) / 3.0;
+		int weight = Math.abs(directionValue - Direction.values().length / 2);
 		SmellVisitor smellVisitor = new SmellVisitor();
 		cell.visitEntities(smellVisitor);
-		return weight * (1 + smellVisitor.getSmell());
+		int historyPoint = 5;
+		for (Cell historyCell : history) {
+			if (historyCell.equals(cell)) {
+				historyPoint--;
+			}
+		}
+
+		return weight / 2 + smellVisitor.getSmell() * 5 + Math.random() * 2 + historyPoint / 2;
 	}
 
 	public AntSmell createSmell() {

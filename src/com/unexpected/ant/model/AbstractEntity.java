@@ -2,7 +2,6 @@ package com.unexpected.ant.model;
 
 import com.unexpected.ant.GameEngine;
 import com.unexpected.ant.gui.View;
-import com.unexpected.ant.model.entity.Echidna;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,11 +40,6 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 		return true;
 	}
 
-	@Override
-	public boolean canBeSteppedOnBy(Echidna entity) {
-		return true;
-	}
-
 	/**
 	 * Returns the first cell of the shape, useful for entities containing only one cell
 	 *
@@ -79,6 +73,7 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 			cell.removeEntity(this);
 		}
 		cells.clear();
+		GameEngine.INSTANCE.getTimer().remove(this);
 		updateView();
 	}
 
@@ -130,14 +125,14 @@ public abstract class AbstractEntity implements Entity, Dynamic {
 	 *
 	 * @param cell The moves to this cell
 	 */
-	public void moveTo(Cell cell) {
+	public boolean moveTo(Cell cell) {
 		for (Cell cell1 : getCells()) {
 			cell1.removeEntity(this);
 		}
-
 		cell.addEntity(this);
 		this.cells.clear();
 		this.cells.add(cell);
 		updateView();
+		return true;
 	}
 }

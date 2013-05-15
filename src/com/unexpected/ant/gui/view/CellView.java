@@ -11,12 +11,12 @@ import java.awt.*;
 
 public class CellView extends AbstractSwingView<Cell> {
 	public CellView(Cell entity, GuiManager guiManager) {
-		super(guiManager, entity);
+		super(entity, guiManager);
 		addMouseListener(GameEngine.INSTANCE.getSprayListener());
 	}
 
 	protected String getAssetPath() {
-		return "assets/tile.png";
+		return "/assets/tile.png";
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class CellView extends AbstractSwingView<Cell> {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Image image = new ImageIcon(getAssetPath()).getImage();
+		Image image = new ImageIcon(getClass().getResource(getAssetPath())).getImage();
 		g.drawImage(image, 0, 0, null);
 	}
 
